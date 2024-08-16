@@ -57,7 +57,7 @@ usethis::use_github_actions_badge("test-coverage")
 usethis::use_github_actions_badge("lint")
 
 # put your email here, i.e. usethis::use_code_of_conduct("me@org.com")
-usethis::use_code_of_conduct()
+usethis::use_code_of_conduct("andrea.pedot@ubep.unipd.it")
 devtools::build_readme()
 
 ## So you can put this very file in the `dev/` folder, where you can

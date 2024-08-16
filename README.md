@@ -1,16 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# laims.analysis <img src='man/figures/logo.png' align="right" height="120" />
+# CholeraGeo4H <img src='man/figures/logo.png' align="right" height="120" />
 
 <!-- badges: start -->
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test
-coverage](https://codecov.io/gh/UBESP-DCTV/laims.analysis/branch/master/graph/badge.svg)](https://app.codecov.io/gh/UBESP-DCTV/laims.analysis?branch=master)
-[![R-CMD-check](https://github.com/UBESP-DCTV/laims.analysis/actions/workflows/check-release.yaml/badge.svg)](https://github.com/UBESP-DCTV/laims.analysis/actions/workflows/check-release.yaml)
-[![lint](https://github.com/UBESP-DCTV/laims.analysis/workflows/lint/badge.svg)](https://github.com/UBESP-DCTV/laims.analysis/actions)
+coverage](https://codecov.io/gh/UBESP-DCTV/CholeraGeo4H/branch/master/graph/badge.svg)](https://app.codecov.io/gh/UBESP-DCTV/CholeraGeo4H?branch=master)
+[![R-CMD-check](https://github.com/UBESP-DCTV/CholeraGeo4H/actions/workflows/check-release.yaml/badge.svg)](https://github.com/UBESP-DCTV/CholeraGeo4H/actions/workflows/check-release.yaml)
+[![lint](https://github.com/UBESP-DCTV/CholeraGeo4H/workflows/lint/badge.svg)](https://github.com/UBESP-DCTV/CholeraGeo4H/actions)
 <!-- badges: end -->
 
 This project would represent the template for the analyses conducted
@@ -60,7 +60,7 @@ of the project.
 
 ## Code of Conduct
 
-Please note that the `laims.analysis` project is released with a
+Please note that the `CholeraGeo4H` project is released with a
 [Contributor Code of
 Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.

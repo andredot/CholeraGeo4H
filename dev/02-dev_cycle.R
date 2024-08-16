@@ -1,7 +1,10 @@
 
 # Project packages (TO BE UPDATED EVERY NEW PACKAGE USED) ----------
 
-prj_pkgs <- c("fs", "readr", "stringr", "purrr")
+prj_pkgs <- c("fs", "readr", "stringr", "purrr", "epiR", "classInt",
+              "sf", "RColorBrewer", "ggplot2","spdep",
+              "readxl", "MASS","mixmeta","metafor","dlnm","tsModel",
+              "splines")
 gh_prj_pkgs <- c()
 meta_pkgs <- c("tidymodels", "tidyverse")
 

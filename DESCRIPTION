@@ -1,25 +1,20 @@
-Package: laims.analysis
-Title: What the Package Does (One Line, Title Case)
+Package: CholeraGeo4H
+Title: Yemen Cholera Outbreak Analysis
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
+    person("Andrea", "Pedot", , "andrea.pedot@ubep.unipd.it", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: file LICENSE
-Imports: 
-    fs,
-    purrr,
-    readr,
-    stringr
+Description: Geospatial analysis of Yemen Cholera Outbreak
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
 Suggests: 
-    autotestthat (>= 0.1.1),
     blogdown,
     checkmate,
     covr,
     depigner,
     devtools,
     distill,
-    emo (>= 0.0.0.9000),
+    fs,
     gitcreds,
     here,
     htmltools,
@@ -29,16 +24,18 @@ Suggests:
     lintr,
     magick,
     markdown,
-    metathis (>= 1.1.1),
+    metathis,
     mice,
     miniUI,
     naniar,
+    purrr,
     qs,
     rms,
     shiny,
     spelling,
-    tarchetypes (>= 0.4.1),
-    targets (>= 0.10.0.9000),
+    stringr,
+    tarchetypes,
+    targets,
     testthat (>= 3.0.0),
     unheadr,
     usethis,
@@ -46,13 +43,10 @@ Suggests:
     webshot,
     withr,
     xaringan,
-    xaringanExtra (>= 0.5.5),
-    xaringanthemer (>= 0.4.1)
-Remotes: 
-    CorradoLanera/autotestthat,
-    hadley/emo
+    xaringanExtra,
+    xaringanthemer
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.2

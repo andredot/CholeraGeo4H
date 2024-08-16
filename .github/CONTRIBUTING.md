@@ -1,8 +1,7 @@
-# Contributing to laims.analysis
+# Contributing to CholeraGeo4H
 
-This outlines how to propose a change to laims.analysis. 
-For more detailed info about contributing to this, and other tidyverse packages, please see the
-[**development contributing guide**](https://rstd.io/tidy-contrib). 
+This outlines how to propose a change to CholeraGeo4H.
+For a detailed discussion on contributing to this and other tidyverse packages, please see the [development contributing guide](https://rstd.io/tidy-contrib) and our [code review principles](https://code-review.tidyverse.org/).
 
 ## Fixing typos
 
@@ -15,10 +14,11 @@ You can find the `.R` file that generates the `.Rd` by reading the comment in th
 If you want to make a bigger change, it's a good idea to first file an issue and make sure someone from the team agrees that it’s needed. 
 If you’ve found a bug, please file an issue that illustrates the bug with a minimal 
 [reprex](https://www.tidyverse.org/help/#reprex) (this will also help you write a unit test, if needed).
+See our guide on [how to create a great issue](https://code-review.tidyverse.org/issues/) for more advice.
 
 ### Pull request process
 
-*   Fork the package and clone onto your computer. If you haven't done this before, we recommend using `usethis::create_from_github("UBESP-DCTV/laims.analysis", fork = TRUE)`.
+*   Fork the package and clone onto your computer. If you haven't done this before, we recommend using `usethis::create_from_github("andredot/CholeraGeo4H", fork = TRUE)`.
 
 *   Install all development dependencies with `devtools::install_dev_deps()`, and then make sure the package passes R CMD check by running `devtools::check()`. 
     If R CMD check doesn't pass cleanly, it's a good idea to ask for help before continuing. 
@@ -42,6 +42,6 @@ If you’ve found a bug, please file an issue that illustrates the bug with a mi
 
 ## Code of Conduct
 
-Please note that the laims.analysis project is released with a
+Please note that the CholeraGeo4H project is released with a
 [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this
 project you agree to abide by its terms.
