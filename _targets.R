@@ -11,7 +11,7 @@ library(targets)
 source("R/functions.R")
 # if you keep your functions in external scripts.
 summarize_data <- function(dataset) {
-  colMeans(dataset)
+  summary(dataset)
 }
 
 # Set target-specific options such as packages:
@@ -19,7 +19,7 @@ tar_option_set(packages = "utils") # nolint
 
 # End this file with a list of target objects.
 list(
-  tar_target(data_raw, import_data("./CholeraGeo4H/data-raw/yemen_cholera_cases.csv")),
+  tar_target(data_raw, import_data("./data-raw/yemen_cholera_cases.csv")),
   tar_target(ycc, preprocess_ycc(data_raw)),
   tar_target(data_summary, summarize_data(ycc)) # Call your custom functions.
 )

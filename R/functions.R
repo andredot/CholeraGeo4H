@@ -30,6 +30,7 @@ import_data <- function(.data_path) {
 
 preprocess_ycc <- function(db) {
   db |>
+    ## Change Column names
     dplyr::select(-c("COD Gov English",
                      "COD Gov Arabic",
                      "COD Gov Pcode")) |>
@@ -41,7 +42,18 @@ preprocess_ycc <- function(db) {
       cfr_abs = `CFR (%)`,
       attack_abs = `Attack Rate (per 1000)`
     ) |>
-    dplyr::mutate(govt = as.factor(govt))
+    ## Group by Week
+    dplyr::mutate(govt = as.factor(govt),
+                  epiw = lubridate::epiweek(date),
+                  epiy = lubridate::epiyear(date)) |>
+    dplyr::group_by(epiy,epiw) |>
+    dplyr::reframe(govt = govt,
+                   date = max(date),
+                   cases = max(cases),
+                   deaths = max(deaths),
+                   cfr_abs = max(deaths),
+                   attack_abs = max(attack_abs)) |>
+    dplyr::distinct()
 }
 
 relevant_computation <- function(db) {
