@@ -6,7 +6,7 @@
 ##       simply run the following code
 prj_name <- basename(here::here())
 fs::file_move(
-  here::here("laims.analysis.Rproj"),  # old project's name
+  here::here("R.Rproj"),  # old project's name
   paste0(prj_name, ".Rproj")  # current project's name
 )
 
