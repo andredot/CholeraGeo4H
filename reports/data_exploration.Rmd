@@ -18,6 +18,12 @@ Also, relevant libraries are loaded
 ```{r}
 library(tidyverse)
 ycc <- tar_read(ycc)
+yem_shp <- tar_read(yem_shp)
+yemen <- tar_read(yemen)
+
+yemen |>
+  ggplot() +
+    geom_sf(aes(fill = ADM1_EN))
 ```
 
 Data should be grouped by the Epi-Week where they have been recorded.
@@ -31,7 +37,7 @@ The dataset contains the description of Cholera cases in Yemen from 22nd May 201
 ```{r, echo = FALSE}
 ycc |>
   ggplot() +
-  geom_line(aes(x = date, y = cases)) +
+  geom_line(aes(x = date, y = cases, color = govt)) +
   facet_wrap(~govt)
 ```
 
@@ -44,4 +50,11 @@ ycc |>
   ggplot() +
   geom_line(aes(x = date, y = new_cases))
 ```
+
+Then, the Yemen shapefile can be imported.
+
+```{r}
+yemshp <- tar_read(yem_shp)
+```
+
 
