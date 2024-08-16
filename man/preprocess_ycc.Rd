@@ -21,3 +21,8 @@ a new db with
 \description{
 Preprocessing of Yemen Cholera cases
 }
+\examples{
+\dontrun{
+  preprocess_ycc(ycc)
+}
+}
