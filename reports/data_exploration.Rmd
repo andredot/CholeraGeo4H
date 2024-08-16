@@ -1,0 +1,53 @@
+---
+title: "Yemen Cholera Data Exploration"
+author: "Andrea Pedot"
+date: "2024-08-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Preliminary steps
+
+The project is written according to the LAIMS analysis template, thus most of the objects can be retrieved through Quarto.
+
+Also, relevant libraries are loaded
+
+```{r}
+library(tidyverse)
+ycc <- tar_read(ycc)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## General description of the Epidemics
+
+The dataset contains the description of Cholera cases in Yemen from 22nd May 2017 to 18th February 2018, with no missing data.
+
+```{r}
+ycc |>
+  ggplot() +
+  geom_line(aes(x = date, y = cases)) +
+  facet_wrap(~govt)
+```
+
+Focusing on a single district, the new cases can be visualised.
+
+```{r}
+ycc |>
+  mutate(new_cases = lag(cases) - cases, .by = govt) |>
+  filter(govt == "Dhamar") |>
+  ggplot() +
+  geom_line(aes(x = date, y = new_cases))
+```
+
