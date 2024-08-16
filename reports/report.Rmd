@@ -3,7 +3,7 @@ title: "`r Sys.getenv('PROJ_TITLE')`"
 subtitle: 0.0.0.9000
 description: "`r Sys.getenv('PROJ_DESCRIPTION')`"
 author:
-  - name: A. Uthor
+  - name: Andrea Pedot
     orcid_id: "0000-0002-0520-7428"
     affiliation: Unit of Biostatistics, Epidemiology, and Public Health
     affiliation_url: https://www.unipd-ubep.it/
@@ -12,13 +12,9 @@ author:
     orcid_id: "0000-0002-0520-7428"
     affiliation: Unit of Biostatistics, Epidemiology, and Public Health
     affiliation_url: https://www.unipd-ubep.it/
-  - name: Dario Gregori
-    orcid_id: "0000-0001-7906-0580"
-    affiliation: Unit of Biostatistics, Epidemiology, and Public Health
-    affiliation_url: https://www.unipd-ubep.it/
 citation_url: "`r Sys.getenv('PROJ_URL')`"
 date: "`r Sys.Date()`"
-bibliography: biblio.bib
+bibliography:  [packages.bib, biblio.bib]
 preview: man/img/LAIMS.png
 self-contained: true
 output:
@@ -29,8 +25,8 @@ output:
 ---
 
 <!-- DON'T RENDER THE REPORT BY HAND DIRECTLY! -->
-<!-- use `targets::tar_make()` instead -->
 
+<!-- use `targets::tar_make()` instead -->
 
 ```{r setup, include=FALSE}
 options(
@@ -53,7 +49,6 @@ list.files(here("R"), pattern = "\\.R$", full.names = TRUE) |>
   lapply(source) |> invisible()
 ```
 
-
 ```{r, echo=FALSE}
 htmltools::img(
  src = knitr::image_uri(here("man", "img", "LAIMS.png")),
@@ -62,6 +57,9 @@ htmltools::img(
  )
 ```
 
+```{r, include=FALSE}
+knitr::write_bib(file = 'packages.bib')
+```
 
 ```{r packages, include=FALSE}
 
@@ -69,18 +67,27 @@ htmltools::img(
 
 ## Introduction
 
-<aside>
-This content will appear in the gutter of the article.
-</aside>
+### Cholera
+
+Cholera is a worlwide problem
+
+### Cholera Oubreak in Yemen
+
+### Anticipatory Action
+
+### Main objective of the Analysis
 
 ## Methods
 
-Footnotes use standard Pandoc markdown notation, for example ^[This will become a hover-able footnote]. The number of the footnote will be automatically generated.
+Footnotes use standard Pandoc markdown notation, for example [^1]. The number of the footnote will be automatically generated.
 
-## Analyses
+[^1]: This will become a hover-able footnote
+
+### Data sources
 
 
-You can show your current state analyses' pipeline, e.g., by
+
+### Data pre-processing
 
 ```{r}
 targets::tar_visnetwork(
@@ -92,16 +99,22 @@ targets::tar_visnetwork(
 )
 ```
 
+### Analysis Plan
+
 
 ## Results
 
-
-You can get the results of your analyses by 
+You can get the results of your analyses by
 
 ```{r}
 str(tar_read(db), 1)
 ```
 
+### Data exploration and visualization - temporal trends
+
+### Data expoloration and visualization - geospatial trends
+
+### BYM Models
 
 ## Discussion
 
@@ -112,32 +125,24 @@ tar_load(irrelevantResult)
 tar_load(relevantResult)
 ```
 
-
 Relevant results are: `r relevantResult`.
-
-
 
 ## Acknowledgments {.appendix}
 
-This is a place to recognize people and institutions. It may also be a good place
-to acknowledge and cite software that makes your work possible.
+This report (and package) has been prepared as part of the Geostatistics for Health Master Degree, as the final project work. Data has been acquired through Humanitarian Data Exchange (see relevant section above on data sources), kindly contributed by the United Nations Office for the Coordination of Humanitarian Affairs (UN OCHA), and the World Health Oranisation (WHO) together with the Yemen Ministry of Health.
 
 ## Author Contributions {.appendix}
 
-We strongly encourage you to include an author contributions statement briefly 
-describing what each author did.
-
-
-
-
+AP prepared the first draft of the analysis plan, FP and DC discussed and improved the analysis plan, and provided ongoing feedback. CL developed the laims.analysis template. 
 
 ## Environment {.appendix}
 
 <details>
-  <summary>Session info</summary>
+
+<summary>Session info</summary>
+
 ```{r, results='markup'}
 devtools::session_info()
 ```
+
 </details>
-
-

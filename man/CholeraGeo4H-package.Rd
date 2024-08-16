@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Geospatial analysis of Yemen Cholera Outbreak
+Geospatial analysis of the 2017-2018 Yemen Cholera Outbreak dynamics.
 }
 \author{
 \strong{Maintainer}: Andrea Pedot \email{andrea.pedot@ubep.unipd.it} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
