@@ -27,7 +27,6 @@ list(
 
   # Preprocessing
   tar_target(ycc, preprocess_ycc(data_raw)),
-  tar_target(data_summary, summarize_data(ycc)),
   tar_target(yem_shp, preprocess_shp(shp_raw)),
   tar_target(cases, preprocess_split(ycc, "cases")),
   tar_target(deaths, preprocess_split(ycc, "deaths")),
@@ -35,6 +34,9 @@ list(
   tar_target(attack_abs, preprocess_split(ycc, "attack_abs")),
   tar_target(yccwider, join_wider(cases, deaths,cfr_abs,attack_abs)),
   tar_target(yemen, preprocess_join(yem_shp, yccwider)),
+
+  ## Render reports
+  tar_render(thesis, "reports/report.Rmd"),
 
   ## Save files
   tar_target(adj_list_out,

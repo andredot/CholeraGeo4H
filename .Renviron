@@ -6,6 +6,6 @@ PROJ_DESCRIPTION="Yemen Outbreak anlysis"
 PROJ_URL="https://github.com/UBESP-DCTV/CholeraGeo4H"
 
 # Shared folders local locations
-PRJ_SHARED_PATH=""
+PRJ_SHARED_PATH="C:\R\CholeraGeo4H"
 INPUT_DATA_FOLDER="data-raw"
 OUTPUT_DATA_FOLDER="output"

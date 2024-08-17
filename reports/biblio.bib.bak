@@ -246,3 +246,39 @@ The eDEWS is able to detect and alert health authorities about cholera cases eve
 	url = {https://www.ifrc.org/document/world-disasters-report-2020},
 	urldate = {2024-08-17},
 }
+
+@misc{aa_ifrc2,
+	title = {Operational {Framework} for {Anticipatory} {Action} 2021-2025 {\textbar} {IFRC}},
+	url = {https://www.ifrc.org/document/operational-framework-anticipatory-action-2021-2025},
+	abstract = {Anticipatory action is a set of actions taken to prevent or mitigate potential disaster impacts before a shock or before acute impacts are felt. It is increasingly recognized as a key solution to reducing the impacts of climate change and extreme weather events. The IFRC and many National Societies have used our decades of experience in disaster preparedness to pioneer the development of anticipatory action approaches, such as forecast-based financing and the Anticipatory Pillar of our Disaster Response Emergency Fund (DREF). This Operational Framework is intended to help our network scale up and mainstream anticipatory action across our work in disaster risk management and climate change adaptation. And it sets out how anticipatory action can support the IFRC's strategic priorities and targets, as outlined in our 2021-2025 plan and budget.},
+	language = {en},
+	urldate = {2024-08-17},
+	month = may,
+	year = {2022},
+}
+
+@misc{ocha_yemen,
+	title = {Yemen - {Subnational} {Administrative} {Boundaries} - {Humanitarian} {Data} {Exchange}},
+	url = {https://data.humdata.org/dataset/cod-ab-yem},
+	language = {en\_AU},
+	urldate = {2024-08-17},
+	file = {Snapshot:C\:\\Users\\andre\\Zotero\\storage\\NPUV7IL2\\cod-ab-yem.html:text/html},
+}
+
+@misc{epi_yemen,
+	title = {Yemen: {Cholera} {Outbreak} {Epidemiology} {Update} {Data} - {Humanitarian} {Data} {Exchange}},
+	shorttitle = {Yemen},
+	url = {https://data.humdata.org/dataset/yemen-cholera-outbreak-daily-epidemiology-update?},
+	language = {en\_AU},
+	urldate = {2024-08-17},
+	file = {Snapshot:C\:\\Users\\andre\\Zotero\\storage\\6778MP8J\\yemen-cholera-outbreak-daily-epidemiology-update.html:text/html},
+}
+
+@Manual{rlanguage,
+    title = {R: A Language and Environment for Statistical Computing},
+    author = {{R Core Team}},
+    organization = {R Foundation for Statistical Computing},
+    address = {Vienna, Austria},
+    year = {2023},
+    url = {https://www.R-project.org/},
+  }
