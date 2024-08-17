@@ -28,8 +28,6 @@ yemen |>
 
 Data should be grouped by the Epi-Week where they have been recorded.
 
-
-
 ## General description of the Epidemics
 
 The dataset contains the description of Cholera cases in Yemen from 22nd May 2017 to 18th February 2018, with no missing data.
@@ -56,5 +54,3 @@ Then, the Yemen shapefile can be imported.
 ```{r}
 yemshp <- tar_read(yem_shp)
 ```
-
-

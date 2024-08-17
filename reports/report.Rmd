@@ -67,13 +67,87 @@ knitr::write_bib(file = 'packages.bib')
 
 ## Introduction
 
-### Cholera
+The project work focuses on the geospatial analysis of a Cholera outbreak in Yemen between 2017 and 2018, using a variety of techniques that leverage the spatial dimension of data.
 
-Cholera is a worlwide problem
+### Cholera epidemiology and risk factors
 
-### Cholera Oubreak in Yemen
+Cholera is a worldwide problem, an extremely virulent disease that spread through the contamination of food and water [@azman_incubation]. It is considered by the World Health Organisation a global threat to public health and an indicator of inequity and lack of social development [@who_cholera]. The typical presentation is a patient with severe acute watery diarrhoea, with severe cases that can cause severe dehydration or even death if left untreated.
+
+Unfortunately, accessing supportive care can be difficult even if it proved to be cheap and effective. Majority of patients can be treated successfully through the Otal Rehydration Solution (ORS), up to 6 liters on the first day. Those interventions should be available at the community-level (Oral Rehydration Points, or ORP) If the patient is at risk of shock, then intravenous fluids together with antibiotics are required, usually in Cholera Treatment Units (CTUs) or Centers (CTCs). For under-5 children, Zync is an effective supplement to add to ORS therapy. **The Case Fatality Rate (CFR) should remain under 1% when treatment is provided early.**
+
+The disease is caused by *Vibrio cholerae*, a bacteria that began spreading during the 19th century from its original reservoir in the Ganges delta in India. Most people infected don't develop any symptoms (but are nevertheless contagious and will shed the bacteria through their faeces for 1-10 days after infection). The majority of those who develop symptoms have mild to moderate ones, usually between 12 hours and 5 days. A minority of patients will develop the severe form, which is threatening patient survival [@who_cholera].
+
+Out of the many serogroups of *V. cholerae*, only O1 and O139 have an outbreak potential. O1 itself caused all the recent outbreaks, but there is no way to distinguish them from the clinical symptoms shown by the patients.
+
+Cholera transmission is closely linked to the lack of Water Access, Sanitation, and Hygiene services, particularly latrines and other facilities. Particularly at high risk are peri-urban areas with precarious conditions (slums), overcrowded Internally Displaced People camps, or remote areas where the population relies on unprotected water sources [@who_cholera]. Without proper sanitation and waste management systems, water sources can become further contaminated, and the water scarcity problem is even worse during periods of drought or flooding [@one_health].
+
+Currently, the World is experiencing the 7th pandemic, which started in South Asia in 1961, reached Africa in 1971, and the Americas in 1991. It is now considered endemic in many countries. WHO continues to report a high number of cases, with 44 countries reporting them in 2022, for a total of nearly 0.5 million cases worldwide and more than 2,300 deaths.
+
+A series of interventions is required to control cholera and to reduce deaths, with a combination of early warning and surveillance systems, along with health and WASH systems strengthening [@who_cholera]. The Red Cross Movement adopts a three-pronged approach:
+
+-   **Break of the transmission chain**, through community mobilisation and volunteer engagement in Branch Outbreak Response Teams. The interventions are developed to incorporate local culture, practices and beliefs when promoting good hygiene practices to prevent contamination or re-contamination.
+
+-   **Lower mortality** through Oral Rehydration Solution distribution in established points (ORPs) or outposts. This is critical, as the local health system may not have the capacity to establish the required amount of ORPs that may be required.
+
+-   **Oral Cholera Vaccination (OCV) campaigns**, whenever those are available through the Global OCV stockpile supported by Gavi, the Vacine Alliance
+
+The appropriate timing of those interventions, as well as the geographical area where they need to be implemented, is a key factor in Outbreak Control [@ifrc_cholera]. On the other hand, long term solutions entails a development of the WASH infrastructure and an improvement of the socio-economic conditions [@who_cholera].
+
+Surveillance is an integrated system that ensures that prompt detection of suspected cholera cases is followed by information sharing with other health system levels, up to international notification according to the International Health Regulations (IHR). The suspect is based on clinical suspicion (acute watery diarrhoea in a patient older than 2 years, with severe dehydration or death). Rapid Diagnostic Tests are a useful tool at the Healthcare facility level, but they are not available everywhere. The PCR test is the usual laboratory confirmation carried out by country-level authorities. Since even a single case is considered an outbreak, as per the IHR, even if the notification is no longer mandatory but follows the criteria specified in Annex 2 [@ihr].
+
+The Global Roadmap to Ending Cholera [@gtfcc_roadmap] is an initiative of the Global Taskforce on Cholera Control that focuses on three strategic axes:
+
+1.  Early detection and quick response to contain outbreaks
+
+2.  A targeted multi-sectoral approach to prevent cholera recurrence, focusing on cholera hotspots, which are relatively small areas that are the most chronically affected by cholera cases
+
+3.  An effective mechanism of coordination for technical support, advocacy, resource mobilization, and partnership at local and global levels
+
+This particular thesis project focuses on the First Strategic Pillar, as it aims to prove the feasibility of Anticipatory Approaches to cholera outbreaks.
+
+### Cholera burden globally
+
+Unfortunately, the global burden of cholera is largely unknown because the majority of cases are not reported. The low reporting can be attributed to the limited capacity of epidemiological surveillance and laboratories and social, political, and economic disincentives for reporting.
+
+Approximately, 1.3 billion people are at risk for cholera in endemic countries. An estimated 2.86 million cholera cases (uncertainty range: 1.3m-4.0m) occur annually in endemic countries. Among these cases, there are an estimated 95,000 deaths (uncertainty range: 21,000-143,000) [@cholera_burden].
+
+[![Annual number of cholera cases in endemic countries](img/worlwide_cholera_cases.jpg)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4455997/figure/pntd.0003832.g002/)
+
+### Cholera Burden in Yemen
+
+According to the World Bank, Yemen is a lower-middle-income country with a population of more than 26 million but population health indicators are some of the lowest in the world due to the ongoing conflicts [@wb].
+
+Yemen is considered a country where Cholera is endemic, given that cases are routinely observed. The Global burden of disease estimates 10.7 millions people at risk, with an incidence rate (1000) of 1.64 and more than 17500 cases annually, with a Case Fatality Rate of 3.2 and 561 deaths annually [@cholera_burden]. Cumulatively, between 2016 and 2021, more than 2.5 million cases were reported, including 4000 deaths [@echo_yemen].
+
+The current analysis focuses on the 2017-2018 outbreak, but even at the end of 2023, Cholera cases were on the surge in six governorates in Yemen. According to the DG ECHO, 80% of cases were among migrants [@echo_yemen]. Nonetheless, official outbreak was declared at the national level only later by the Ministry of Public Health and Population in Aden. In March, there was an increase again in the northern governorates with over 6000 suspected cholera cases, 56 deaths (case fatality rate of 0.9%), and 47% of cases being clinically severe [@unicef_yemen]. In June 2024, the International Organisation on Migration (IOM) raised concerns over 30,000 suspected cases, with the potential of reaching 255,000 by September 2024 if preparedness and response activities are not scaled up [@iom_yemen].
+
+Yemen experienced the largest reported cholera outbreak in recent history, from 2016 to 2022. The analysis focuses on a short time span for which epidemiological data are available. The main driver has been a protracted civil war, which damaged the already vulnerable health and WASH infrastructure. This has been compounded with chronic malnutrition, as well as cyclical floods and drought episodes [@one_health].
+
+[![Total number of suspected cholera cases in Yemen and associated case-fatality rate (CFR) from 2009 to 2019.](img/yemen_outbreak.jpg)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7411249/figure/f1-jpmph-20-154/)
+
+The situation worsened in late 2016, as can be seen from the Chart. This resulted in more than 16 million people without basic services and more than 2 million IDPs being forced to live in deprived and harsh environments. This contributed to a sustained number of cases, probably due to groundwater contamination, in addition to a general lack of safe drinking water in the country [@one_health]. A national electronic Disease Early Warning System (eDEWS) was established in 2016 and used together with the Bulletin of the Yemen Ministry of Health to monitor the evolution of the outbreak, providing a reliable source of data even if not always timely due to the ongoing conflict [@ews_yemen].
+
+Increased rainfall, flooding, and a particularly strong El Niño and winds may have further contaminated water sources in Yemen and aided the spread of cholera-contaminated flying insects (chironomids) from the Horn of Africa to Yemen [@paz_cholera_2019].
 
 ### Anticipatory Action
+
+The UN Office for the Coordination of Humanitarian Affairs (OCHA) defines Anticipatory Action (AA) as those taken ahead of a disaster to support vulnerable communities. AA emerges from the increasing confidence that we can predict the occurrence and impact of some hazards [@aa_ocha].
+
+It is composed of three main components:
+
+1.  **Pre-agreed trigger** consists of thresholds and decision-making rules based on reliable, timely and measurable forecasts. The advancement of weather forecasting and climate science is enabling more and more actions [@aa_rccc].
+
+2.  **Pre-agreed activities:** This consists of accountable, feasible, effective and efficient actions to be implemented to support vulnerable communities in the window of opportunity between the trigger moment and the full impact of a shock
+
+3.  **Pre-arranged financing:** This consists of guaranteed funding that is available to be released based on the pre-agreed trigger for the pre-agreed activities.
+
+The Red Cross Movement usually adds a fourth component: the Capacity to implement those actions on time. This is crucial, and capacity-building efforts to ensure Readiness are non trivial. Depending on the type of hazard and forecasts available, anticipatory action can be carried out well ahead of the shock (for slower onset events) or just before the impacts fully take hold (for more rapid-onset events) [@aa_ahub].
+
+The International Federation of Red Cross Red Crescent Societies defines with a broader scope the actions taken to reduce the humanitarian impacts of a forecast hazard before it occurs or before its most acute impacts are felt [@aa_ifrc, @aa_ifrc2]. This additional component enables the definition to be extended to epidemics.
+
+The decision to act is based on a forecast, or collective risk analysis, of when, where and how the event will unfold. Anticipatory action is reshaping the humanitarian system, driving a shift from reacting to hazards to acting ahead of them [@aa_ahub].
+
+### Anticipatory Action for Epidemics
 
 ### Main objective of the Analysis
 
@@ -84,8 +158,6 @@ Footnotes use standard Pandoc markdown notation, for example [^1]. The number of
 [^1]: This will become a hover-able footnote
 
 ### Data sources
-
-
 
 ### Data pre-processing
 
@@ -100,7 +172,6 @@ targets::tar_visnetwork(
 ```
 
 ### Analysis Plan
-
 
 ## Results
 
@@ -133,7 +204,7 @@ This report (and package) has been prepared as part of the Geostatistics for Hea
 
 ## Author Contributions {.appendix}
 
-AP prepared the first draft of the analysis plan, FP and DC discussed and improved the analysis plan, and provided ongoing feedback. CL developed the laims.analysis template. 
+AP prepared the first draft of the analysis plan, FP and DC discussed and improved the analysis plan, and provided ongoing feedback. CL developed the laims.analysis template.
 
 ## Environment {.appendix}
 
