@@ -53,58 +53,53 @@ import_shape <- function(.data_path) {
 preprocess_ycc <- function(db) {
 
   ## Names aligned with the OCHA Shapefile
-  join_dict <- data.frame(
-    csv = c("Abyan", "Aden", "Al-Hudaydah", "Al Bayda", "Al Dhale'e",
-            "Al Hudaydah", "Al Jawf", "Al Maharah", "AL Mahrah",
-            "Al Mahwit", "Al_Jawf", "Amanat Al Asimah", "Amran",
-            "Dhamar", "Hajjah", "Ibb", "Lahj",
-            "Ma'areb", "Marib", "Moklla", "Raymah",
-            "Sa'ada", "Sana'a", "Say'on", "Shabwah",
-            "Taizz",
-            "Socotra", "Sana'a", "Hadramawt"),
-    shp = c("Abyan", "Aden", "Al Hodeidah", "Al Bayda", "Ad Dali'",
-            "Al Hodeidah", "Al Jawf", "Al Maharah", "Al Maharah",
-            "Al Mahwit", "Al Jawf", NA, "Amran",
-            "Dhamar", "Hajjah", "Ibb", "Lahj",
-            "Ma'rib", "Ma'rib", NA, "Raymah",
-            "Sa'dah", "Sana'a", NA, "Shabwah",
-            "Ta'iz",
-            "Socotra", "Sana'a City", "Hadramawt"
-    )
-  )
+  # join_dict <- data.frame(
+  #   csv = c("YE11", "YE12", "YE13", "YE14", "YE15",
+  #           "YE16", "YE17", "YE18", "YE19", "YE20",
+  #           "YE21", "YE22", "YE23", "YE24", "YE25",
+  #           "YE26", "YE27", "YE28", "YE29", "YE30",
+  #           "YE31", "YE32"
+  #   ),
+  #   shp = c("YE11", "YE12", "YE13", "YE14", "YE15",
+  #           "YE16", "YE17", "YE18", "YE19", "YE20",
+  #           "YE21", "YE22", "YE23", "YE24", "YE25",
+  #           "YE26", "YE27", "YE28", "YE29", "YE30",
+  #           "YE31", "YE32"
+  #   )
+  # )
 
   db |>
     ## Change Column names
     dplyr::select(-c("COD Gov English",
-                     "COD Gov Arabic",
-                     "COD Gov Pcode")) |>
+                     "COD Gov Arabic")) |>
     dplyr::rename(
       date = Date,
       govt = Governorate,
       cases = Cases,
       deaths = Deaths,
       cfr_abs = `CFR (%)`,
-      attack_abs = `Attack Rate (per 1000)`
+      attack_abs = `Attack Rate (per 1000)`,
+      pcode = `COD Gov Pcode`
     ) |>
     ## Group by Week
     dplyr::mutate(govt = as.factor(govt),
                   epiw = lubridate::epiweek(date),
                   epiy = lubridate::epiyear(date),
                   epi_date = paste0(epiy,"-",epiw)) |>
-    dplyr::group_by(epi_date, govt) |>
+    dplyr::group_by(epi_date, pcode) |>
     dplyr::reframe(date = max(date),
                    cases = max(cases),
                    deaths = max(deaths),
                    cfr_abs = max(deaths),
                    attack_abs = max(attack_abs)
                    ) |>
-    dplyr::distinct() |>
+    dplyr::distinct() #|>
     ## Adapt names to SHP ones
-    dplyr::left_join(join_dict,
-                     by = dplyr::join_by(govt == csv),
-                     relationship = "many-to-many") |>
-    dplyr::select(-govt) |>
-    dplyr::rename(govt = shp)
+    # dplyr::left_join(join_dict,
+    #                  by = dplyr::join_by(govt == csv),
+    #                  relationship = "many-to-many") |>
+    # dplyr::select(-govt) |>
+    # dplyr::rename(govt = shp)
 }
 
 preprocess_shp <- function(db) {
@@ -114,8 +109,8 @@ preprocess_shp <- function(db) {
 
 preprocess_split <- function(db, col) {
   db |>
-    dplyr::select(epi_date,govt,{{col}}) |>
-    dplyr::filter(!is.na(govt)) |>
+    dplyr::select(epi_date,govt,pcode,{{col}}) |>
+    # dplyr::filter(!is.na(govt)) |>
     tidyr::pivot_wider(names_from = epi_date,
                        values_from = {{col}},
                        names_prefix = paste0({{col}},"-"))
@@ -125,15 +120,15 @@ preprocess_join <- function(shp, db) {
   require(sf)
   dplyr::left_join(
     shp, db,
-    by = dplyr::join_by(ADM1_EN == govt)
+    by = dplyr::join_by(ADM1_PCODE == pcode)
     )
 }
 
 join_wider <- function(db1, db2, db3, db4) {
   db1 |>
-    dplyr::left_join(db2, by = dplyr::join_by(govt)) |>
-    dplyr::left_join(db3, by = dplyr::join_by(govt)) |>
-    dplyr::left_join(db4, by = dplyr::join_by(govt))
+    dplyr::left_join(db2, by = dplyr::join_by(pcode)) |>
+    dplyr::left_join(db3, by = dplyr::join_by(pcode)) |>
+    dplyr::left_join(db4, by = dplyr::join_by(pcode))
 }
 
 adj_list <- function(shp, .data_path) {
