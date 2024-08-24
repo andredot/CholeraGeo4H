@@ -4,9 +4,27 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Andrea", "Pedot", , "andrea.pedot@ubep.unipd.it", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Geospatial analysis of Yemen Cholera Outbreak
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Description: 
+  Geospatial analysis of the 2017-2018 Yemen Cholera Outbreak dynamics.
+License: `use_gpl3_license()`
+Imports: 
+    classInt,
+    dlnm,
+    epiR,
+    fs,
+    ggplot2,
+    MASS,
+    metafor,
+    mixmeta,
+    purrr,
+    RColorBrewer,
+    readr,
+    readxl,
+    sf,
+    spdep,
+    splines,
+    stringr,
+    tsModel
 Suggests: 
     blogdown,
     checkmate,
@@ -14,7 +32,6 @@ Suggests:
     depigner,
     devtools,
     distill,
-    fs,
     gitcreds,
     here,
     htmltools,
@@ -28,12 +45,10 @@ Suggests:
     mice,
     miniUI,
     naniar,
-    purrr,
     qs,
     rms,
     shiny,
     spelling,
-    stringr,
     tarchetypes,
     targets,
     testthat (>= 3.0.0),

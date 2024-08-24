@@ -1,0 +1,87 @@
+---
+title: "Yemen Cholera Data Exploration"
+author: "Andrea Pedot"
+date: "2024-08-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Preliminary steps
+
+The project is written according to the LAIMS analysis template, thus most of the objects can be retrieved through Quarto.
+
+```{r}
+db <- tar_read(data_raw)
+  db |>
+    ## Change Column names
+    dplyr::select(-c("COD Gov English",
+                     "COD Gov Arabic")) |>
+    dplyr::rename(
+      date = Date,
+      govt = Governorate,
+      cases = Cases,
+      deaths = Deaths,
+      cfr_abs = `CFR (%)`,
+      attack_abs = `Attack Rate (per 1000)`,
+      pcode = `COD Gov Pcode`
+    ) |>
+    ## Group by Week
+    dplyr::mutate(govt = as.factor(govt),
+                  epiw = lubridate::epiweek(date),
+                  epiy = lubridate::epiyear(date),
+                  epi_date = paste0(epiy,"-",epiw)) |>
+    dplyr::group_by(epi_date, pcode) |>
+    dplyr::reframe(date = max(date),
+                   cases = max(cases),
+                   deaths = max(deaths),
+                   cfr_abs = max(deaths),
+                   attack_abs = max(attack_abs)
+                   ) |>
+    dplyr::distinct()
+```
+
+
+Also, relevant libraries are loaded
+
+```{r}
+library(tidyverse)
+ycc <- tar_read(ycc)
+yem_shp <- tar_read(yem_shp)
+yemen <- tar_read(yemen)
+
+yemen |>
+  ggplot() +
+    geom_sf(aes(fill = ADM1_EN))
+```
+
+Data should be grouped by the Epi-Week where they have been recorded.
+
+## General description of the Epidemics
+
+The dataset contains the description of Cholera cases in Yemen from 22nd May 2017 to 18th February 2018, with no missing data.
+
+```{r, echo = FALSE}
+ycc |>
+  ggplot() +
+  geom_line(aes(x = date, y = cases, color = govt)) +
+  facet_wrap(~govt)
+```
+
+Focusing on a single district, the new cases can be visualised.
+
+```{r, echo = FALSE}
+ycc |>
+  filter(govt == "Dhamar") |>
+  mutate(new_cases = cases - lag(cases)) |>
+  ggplot() +
+  geom_line(aes(x = date, y = new_cases))
+```
+
+Then, the Yemen shapefile can be imported.
+
+```{r}
+yemshp <- tar_read(yem_shp)
+```

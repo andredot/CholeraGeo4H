@@ -4,7 +4,7 @@
 prj_pkgs <- c("fs", "readr", "stringr", "purrr", "epiR", "classInt",
               "sf", "RColorBrewer", "ggplot2","spdep",
               "readxl", "MASS","mixmeta","metafor","dlnm","tsModel",
-              "splines")
+              "splines", "pandoc")
 gh_prj_pkgs <- c()
 meta_pkgs <- c("tidymodels", "tidyverse")
 
