@@ -282,3 +282,31 @@ The eDEWS is able to detect and alert health authorities about cholera cases eve
     year = {2023},
     url = {https://www.R-project.org/},
   }
+  
+@article{lunn_bugs_2009,
+	title = {The {BUGS} project: {Evolution}, critique and future directions},
+	volume = {28},
+	copyright = {http://onlinelibrary.wiley.com/termsAndConditions\#vor},
+	issn = {0277-6715, 1097-0258},
+	shorttitle = {The {BUGS} project},
+	url = {https://onlinelibrary.wiley.com/doi/10.1002/sim.3680},
+	doi = {10.1002/sim.3680},
+	abstract = {Abstract
+            BUGS is a software package for Bayesian inference using Gibbs sampling. The software has been instrumental in raising awareness of Bayesian modelling among both academic and commercial communities internationally, and has enjoyed considerable success over its 20‐year life span. Despite this, the software has a number of shortcomings and a principal aim of this paper is to provide a balanced critical appraisal, in particular highlighting how various ideas have led to unprecedented flexibility while at the same time producing negative side effects. We also present a historical overview of the BUGS project and some future perspectives. Copyright © 2009 John Wiley \& Sons, Ltd.},
+	language = {en},
+	number = {25},
+	urldate = {2024-08-17},
+	journal = {Statistics in Medicine},
+	author = {Lunn, David and Spiegelhalter, David and Thomas, Andrew and Best, Nicky},
+	month = nov,
+	year = {2009},
+	pages = {3049--3067},
+}
+
+@misc{who_risk,
+	title = {Risk {Assessment} {WHO}},
+	url = {https://www.who.int/emergencies/risk-assessments},
+	language = {en},
+	urldate = {2024-08-24},
+	file = {Snapshot:C\:\\Users\\andre\\Zotero\\storage\\PNU34B74\\risk-assessments.html:text/html},
+}

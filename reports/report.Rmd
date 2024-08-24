@@ -73,7 +73,7 @@ The project focuses on the geospatial analysis of a cholera outbreak in Yemen be
 
 Cholera is a worldwide problem. It is a highly virulent disease that spreads through the contamination of food and water [\@azman_incubation]. The World Health Organization considers it a global threat to public health and an indicator of inequity and lack of social development [@who_cholera]. The typical presentation is a patient with severe acute watery diarrhoea, with severe cases that can cause severe dehydration or even death if left untreated.
 
-Unfortunately, accessing supportive care can be complicated, even if it proved cheap and effective. Most patients can be treated successfully through the Oral Rehydration Solution (ORS), up to 6 litres on the first day. Those interventions should be available at the community level (Oral Rehydration Points, or ORP). If the patient is at risk of shock, intravenous fluids and antibiotics are required, usually in Cholera Treatment Units (CTUs) or Centers (CTCs). For under-5 children, Zync is an effective supplement to add to ORS therapy. **The Case Fatality Rate (CFR) should remain under 1% when treatment is provided early.**
+Unfortunately, accessing supportive care can be complicated, even if it proves cheap and effective. Most patients can be treated successfully through the Oral Rehydration Solution (ORS), up to 6 litres on the first day. Those interventions should be available at the community level (Oral Rehydration Points, or ORP). If the patient is at risk of shock, intravenous fluids and antibiotics are required, usually in Cholera Treatment Units (CTUs) or Centers (CTCs). For under-5 children, Zync is an effective supplement to add to ORS therapy. **The Case Fatality Rate (CFR) should remain under 1% when treatment is provided early.**
 
 The disease is caused by *Vibrio cholerae*, a bacteria that began spreading during the 19th century from its original reservoir in the Ganges delta in India. Most people infected don't develop any symptoms (but are nevertheless contagious and will shed the bacteria through their faeces for 1-10 days after infection). Most of those who develop symptoms have mild to moderate ones, usually between 12 hours and five days. A minority of patients will develop the severe form, which is threatening patient survival [@who_cholera].
 
@@ -91,7 +91,7 @@ A series of interventions is required to control cholera and to reduce deaths, w
 
 -   **Oral Cholera Vaccination (OCV) campaigns**, whenever those are available through the Global OCV stockpile supported by Gavi, the Vaccine Alliance
 
-The appropriate timing of those interventions, as well as the geographical area where they need to be implemented, is a crucial factor in Outbreak Control [@ifrc_cholera]. On the other hand, long-term solutions entail developing the WASH infrastructure and improving socio-economic conditions [@who_cholera].
+The appropriate timing of those interventions and the geographical area where they need to be implemented are crucial factors in Outbreak Control [@ifrc_cholera]. On the other hand, long-term solutions entail developing the WASH infrastructure and improving socio-economic conditions [@who_cholera].
 
 Surveillance is an integrated system that ensures prompt detection of suspected cholera cases, followed by information sharing with other health system levels, up to international notification according to the International Health Regulations (IHR). The suspect is based on clinical suspicion (acute watery diarrhoea in a patient older than two years, with severe dehydration or death). Rapid diagnostic tests are valuable tools at the healthcare facility level but are not available everywhere. The PCR test is the usual laboratory confirmation carried out by country-level authorities since even a single case is considered an outbreak, as per the IHR, even if the notification is no longer mandatory but follows the criteria specified in Annex 2 [@ihr].
 
@@ -115,7 +115,7 @@ Approximately 1.3 billion people are at risk for cholera in endemic countries. A
 
 ### Cholera Burden in Yemen
 
-According to the World Bank, Yemen is a lower-middle-income country with a population of more than 26 million, but due to the ongoing conflicts, its population health indicators are some of the lowest in the world[@wb].
+According to the World Bank, Yemen is a lower-middle-income country with a population of more than 26 million. However, due to ongoing conflicts, its population health indicators are some of the lowest in the world[@wb].
 
 Yemen is considered a country where Cholera is endemic, given that cases are routinely observed. The Global burden of disease estimates 10.7 million people at risk, with an incidence rate (1000) of 1.64 and more than 17500 cases annually, a Case Fatality Rate of 3.2, and 561 deaths annually [@cholera_burden]. Cumulatively, between 2016 and 2021, more than 2.5 million cases were reported, including 4000 deaths [@echo_yemen].
 
@@ -135,7 +135,7 @@ The UN Office for the Coordination of Humanitarian Affairs (OCHA) defines Antici
 
 It is composed of three main components:
 
-1.  A pre-agreed trigger consists of thresholds and decision-making rules based on reliable, timely, and measurable forecasts. The advancement of weather forecasting and climate science is enabling more actions [@aa_rccc].
+1.  A pre-agreed trigger consists of thresholds and decision-making rules based on reliable, timely, and measurable forecasts. The advancement of weather forecasting and climate science enables more actions [@aa_rccc].
 
 2.  **Pre-agreed activities:** This consists of accountable, feasible, effective and efficient actions to be implemented to support vulnerable communities in the window of opportunity between the trigger moment and the full impact of a shock
 
@@ -149,9 +149,71 @@ The decision to act is based on a forecast, or collective risk analysis, of when
 
 ### Anticipatory Action for Epidemics
 
-### The main objective of the Analysis
+Even if the attention is great on Anticipatory Action for Epidemics, only a few viable examples are available. Anticipation Hub recognises that technological progress in scientific modelling and forecasting systems are enabling better predictions of who, how, when and where people might be affected by disease outbreaks and epidemics [@aa_health].
+
+Health hazards differ from weather-related ones in different ways:
+
+-   Risk Analysis and Early Warning systems in the health sector are radically differentsince forecasting models are of a different nature. Also, it is widespread in the Health sector to base clinical and public health decisions on risk assessment tools instead of relying on hard thresholds. This is done to enable contextual information, difficult to capture in triggers, to be part of the decision process [@who_risk]
+
+-   Political sensitivity of activation, which makes relying on historical data difficult, given both the delays in reporting and the different capacity of health systems to report
+
+-   Early Actions are interlinked with the disaster impact. In fact, while for cyclones AA can reduce the impact, for Epidemics the number of cases itself depend on the Early Actions, thus changing the disaster
+
+In 2021, World Health Organization (WHO), UNICEF, the International Organization for Migration (IOM), as well as scientists and researchers from the medical, public health, and climate communities are working to test if anticipatory action can stop an outbreak from becoming a crisis in Yemen, Mozambique, and the Democratic Republic of the Congo. The pilot initiative, part of a larger portfolio to scale up anticipatory action, is co-sponsored by the UN Office for the Coordination of Humanitarian Affairs (OCHA), the Global Task Force on Cholera Control (GTFCC), the Risk-Informed Early Action Partnership (REAP), the UK Government, and the Red Cross, and financed by the UN Central Emergency Response Fund (CERF) [@aa_health2].
+
+Particularly in the trigger part, it is recognized that triggers can take into consideration different factors:
+
+-   Suspected cholera cases before confirmation from the laboratory or reported cases in nearby locations to anticipate preparedness activities and scale up surveillance systems
+
+-   Sudden shocks such as floods, drought or large displacement waves.
+
+-   A reduction in vaccine coverage or deteriorating water and sanitation conditions.
+
+-   Temperature, rainfall and other predictable environmental factors will provide significant additional lead time and help dynamically target at-risk areas, including where to detect contaminated water.
+
+-   ...
+
+Those different possibilities have been reduced to three main approaches in the recent "Anticipatory Action for Epidemics" briefing from the Anticipation Hub [@alcayna_anticipatory_2023], with also suggestions on how to develop them:
+
+1.  Identify the health impacts linked to hydrometeorological hazards, including a health component into existing protocols for other hazards, such as floods or cyclones.
+
+2.  Multi-stepped composite (surveillance and aggravating factors). This approach combines different indicators, including surveillance data on the disease of interest and known drivers of disease transmission, to establish a composite trigger.
+
+3.  Mathematical models predict outbreak risk and the probability of a future outbreak in a given country or location.
+
+That said, developing a protocol for Epidemics requires shifting the mindset from preventing an outbreak to preventing it from reaching critical levels.
 
 ## Methods
+
+### Main objective of the Analysis
+
+Usually, disease Early Warning systems focus on defining an alert or alarm level for the administrative subdivision where the suspected or confirmed case is found. This analysis aims to explore the geographical and temporal dimensions of a two-year-long Cholera outbreak in Yemen and test the feasibility of an alert for neighbouring areas with different lead times.
+
+### Analysis Plan
+
+Given the complexity of the task, a few assumptions are kept:
+
+-   At this stage, no meteorological data is integrated. The model relies only on epidemiological variables in each administrative area.
+
+-   The analysis focuses on the first administrative level since data are made freely available only at this level.
+
+-   No considerations are made for population movement (e.g., road network or local markets) or displacement dynamics (e.g., within or across the country). Only the geographical proximity of the administrative areas is considered.
+
+Exploration of temporal and geographical dynamics:
+
+-   Case Fatality and Attack rates need to be smoothened through a BYM Model. This will mask the effect of overdispersion and identify areas where CFR and AR are exceptionally high. Both variables are calculated in the previous three weeks (as in the OCHA paper [@drc_cholera]).
+
+-   Each area is classified into three classes: either the outbreak is controlled (level 0 - preparedness), cases are on the surge but with CFR under the 1% threshold (level 1 - early action), or CFR is over 1%, signalling an unacceptable stress level (level 2 - response). This classification is calculated only on data available at that moment in time and is the target of prediction.
+
+-   Two locations will be analysed for temporal correlation from a surge in cases in neighbouring districts through a Distributed Lag Model, identifying the best lead time for the following step. Pooled estimates are obtained to verify the temporal correlation of that with a meta-analytical approach.
+
+Once the pre-processing and exploration are completed, modelling steps can be implemented
+
+-   The target of prediction is the level of a particular district, a number of weeks in advance, identified in the exploration stage.
+
+-   Three models are tested: the first uses the number of cases, the second the CFR, and the third the attack rates of the districts as input variables. All of them are BYM models with the 3-level classification as a covariate.
+
+-   A fourth model, a non-bayesian Poisson model, is also used as a reference.
 
 ### Data sources
 
@@ -193,8 +255,7 @@ All data can be downloaded from [this website](https://data.humdata.org/dataset/
 
 The main tools for the whole project have been R Statistical Software [@rlanguage] and OpenBugs [@lunn_bugs_2009] for the Bayesian modelling. A GitHub repo has been created to facilitate version control and the laims.analysis template has been used. The template incorporates most of the libraries needed to reduce the pipeline creation and maintenance and isolates the whole project as a package. The complete pipeline can be seen in the image below.
 
-```{r}
-targets::tar_visnetwork(targets_only = TRUE)
+```{r} targets::tar_visnetwork(targets_only = TRUE)}
 ```
 
 The above figure shows different preprocessing steps, which are available as part of the package:
@@ -205,7 +266,7 @@ The above figure shows different preprocessing steps, which are available as par
 
 -   Calculating the adjacency matrix used for the BYM models.
 
-### Analysis Plan
+-   Calculating the target variable and the 3-weekly CFR, new cases and attack rate, as per analytical plan.
 
 ## Results
 
