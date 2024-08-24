@@ -50,24 +50,7 @@ import_shape <- function(.data_path) {
 #' \dontrun{
 #'   preprocess_ycc(ycc)
 #' }
-preprocess_ycc <- function(db) {
-
-  ## Names aligned with the OCHA Shapefile
-  # join_dict <- data.frame(
-  #   csv = c("YE11", "YE12", "YE13", "YE14", "YE15",
-  #           "YE16", "YE17", "YE18", "YE19", "YE20",
-  #           "YE21", "YE22", "YE23", "YE24", "YE25",
-  #           "YE26", "YE27", "YE28", "YE29", "YE30",
-  #           "YE31", "YE32"
-  #   ),
-  #   shp = c("YE11", "YE12", "YE13", "YE14", "YE15",
-  #           "YE16", "YE17", "YE18", "YE19", "YE20",
-  #           "YE21", "YE22", "YE23", "YE24", "YE25",
-  #           "YE26", "YE27", "YE28", "YE29", "YE30",
-  #           "YE31", "YE32"
-  #   )
-  # )
-
+preprocess_ycc <- function(db, shp) {
   db |>
     ## Change Column names
     dplyr::select(-c("COD Gov English",
@@ -81,6 +64,13 @@ preprocess_ycc <- function(db) {
       attack_abs = `Attack Rate (per 1000)`,
       pcode = `COD Gov Pcode`
     ) |>
+    ## Deal with "#NA" in pcode:
+    ## Moklla amd Say'on are cities in Hadramawt (PCODE 19)
+    dplyr::mutate(dplyr::across(pcode,
+       ~ dplyr::if_else(
+         .x == "#N/A" & (govt == "Moklla" | govt == "Say'on"),
+         true = "19", false = .x))) |>
+    dplyr::mutate(pcode = paste0("YE", pcode)) |>
     ## Group by Week
     dplyr::mutate(govt = as.factor(govt),
                   epiw = lubridate::epiweek(date),
@@ -91,26 +81,30 @@ preprocess_ycc <- function(db) {
                    cases = max(cases),
                    deaths = max(deaths),
                    cfr_abs = max(deaths),
-                   attack_abs = max(attack_abs)
+                   attack_abs = max(attack_abs) #,
+                   ## Variables in last 3 weeks
+                   #new_cases_3w =,
+                   #new_death_3ws =,
+                   #cfr_3w =,
+                   #attack_3w,
                    ) |>
-    dplyr::distinct() #|>
-    ## Adapt names to SHP ones
-    # dplyr::left_join(join_dict,
-    #                  by = dplyr::join_by(govt == csv),
-    #                  relationship = "many-to-many") |>
-    # dplyr::select(-govt) |>
-    # dplyr::rename(govt = shp)
+    dplyr::distinct() |>
+    ## Add OCHA governatorate names
+    dplyr::left_join(
+      shp |>
+        dplyr::select(ADM1_PCODE,ADM1REF_EN),
+      by = dplyr::join_by(pcode == ADM1_PCODE)
+    ) # |> sf::st_drop_geometry()
 }
 
 preprocess_shp <- function(db) {
   db |>
-    dplyr::select(ADM1_EN, ADM1_PCODE, ADM1REF_EN)
+    dplyr::select(ADM1_PCODE, ADM1REF_EN, geometry)
 }
 
 preprocess_split <- function(db, col) {
   db |>
-    dplyr::select(epi_date,govt,pcode,{{col}}) |>
-    # dplyr::filter(!is.na(govt)) |>
+    dplyr::select(epi_date,pcode,{{col}}) |>
     tidyr::pivot_wider(names_from = epi_date,
                        values_from = {{col}},
                        names_prefix = paste0({{col}},"-"))

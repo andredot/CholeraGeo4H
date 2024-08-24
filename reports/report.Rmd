@@ -255,7 +255,8 @@ All data can be downloaded from [this website](https://data.humdata.org/dataset/
 
 The main tools for the whole project have been R Statistical Software [@rlanguage] and OpenBugs [@lunn_bugs_2009] for the Bayesian modelling. A GitHub repo has been created to facilitate version control and the laims.analysis template has been used. The template incorporates most of the libraries needed to reduce the pipeline creation and maintenance and isolates the whole project as a package. The complete pipeline can be seen in the image below.
 
-```{r} targets::tar_visnetwork(targets_only = TRUE)}
+```{r} 
+targets::tar_visnetwork(targets_only = TRUE)
 ```
 
 The above figure shows different preprocessing steps, which are available as part of the package:

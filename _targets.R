@@ -26,7 +26,7 @@ list(
   tar_target(shp_raw, import_shape("./data-raw/yemen_shp/yem_admbnda_adm1_govyem_cso_20191002.shp")),
 
   # Preprocessing
-  tar_target(ycc, preprocess_ycc(data_raw)),
+  tar_target(ycc, preprocess_ycc(data_raw, shp_raw)),
   tar_target(yem_shp, preprocess_shp(shp_raw)),
   tar_target(cases, preprocess_split(ycc, "cases")),
   tar_target(deaths, preprocess_split(ycc, "deaths")),
