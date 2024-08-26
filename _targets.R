@@ -9,7 +9,8 @@ library(tarchetypes)
 
 # Define custom functions and other global objects.
 # This is where you write
-source("R/functions.R")
+source("R/preprocessing.R")
+source("R/figures.R")
 # if you keep your functions in external scripts.
 summarize_data <- function(dataset) {
   summary(dataset)

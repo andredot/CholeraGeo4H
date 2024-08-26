@@ -31,11 +31,19 @@ a <- db |>
       .names = "{.col}_4w"
     )) |>
   dplyr::mutate(cfr_4w = deaths_4w / cases_4w,
+                cfr_4w = ifelse(cfr_4w == NaN, 0),
                 attack_4w = cases_4w / pop
                 ) |>
   dplyr::ungroup()
   
-
+tar_read(ycc_lag) |>
+  dplyr::mutate(
+    status = dplyr::case_when(
+      cases_4w <= 0 ~ 0,
+      cfr_abs  <= 1 ~ 1,
+      cfr_abs  > 1  ~ 2
+      )
+  )
 
 
 ```
