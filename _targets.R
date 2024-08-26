@@ -32,8 +32,20 @@ list(
   tar_target(deaths, preprocess_split(ycc, "deaths")),
   tar_target(cfr_abs, preprocess_split(ycc, "cfr_abs")),
   tar_target(attack_abs, preprocess_split(ycc, "attack_abs")),
+
+  tar_target(ycc_lag, preprocess_ycc_lags(ycc) |>
+                        cholera_status()),
+  tar_target(cases_4w, preprocess_split(ycc_lag, "cases_4w")),
+  tar_target(deaths_4w, preprocess_split(ycc_lag, "deaths_4w")),
+  tar_target(cfr_4w, preprocess_split(ycc_lag, "cfr_4w")),
+  tar_target(attack_4w, preprocess_split(ycc_lag, "attack_4w")),
+  tar_target(status, preprocess_split(ycc_lag, "status")),
+
   tar_target(yccwider, join_wider(cases, deaths,cfr_abs,attack_abs)),
-  tar_target(yemen, preprocess_join(yem_shp, yccwider)),
+  tar_target(yccwider_lag, join_wider(cases_4w, deaths_4w,
+                                      cfr_4w, attack_4w, status)),
+  tar_target(yemen, yem_shp |> preprocess_join(yccwider)),
+  tar_target(yemen_4w, yem_shp |>  preprocess_join(yccwider_lag)),
 
   ## Render reports
   tar_render(thesis, "reports/report.Rmd"),

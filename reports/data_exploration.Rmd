@@ -14,33 +14,30 @@ knitr::opts_chunk$set(echo = TRUE)
 The project is written according to the LAIMS analysis template, thus most of the objects can be retrieved through Quarto.
 
 ```{r}
-db <- tar_read(data_raw)
-  db |>
-    ## Change Column names
-    dplyr::select(-c("COD Gov English",
-                     "COD Gov Arabic")) |>
-    dplyr::rename(
-      date = Date,
-      govt = Governorate,
-      cases = Cases,
-      deaths = Deaths,
-      cfr_abs = `CFR (%)`,
-      attack_abs = `Attack Rate (per 1000)`,
-      pcode = `COD Gov Pcode`
-    ) |>
-    ## Group by Week
-    dplyr::mutate(govt = as.factor(govt),
-                  epiw = lubridate::epiweek(date),
-                  epiy = lubridate::epiyear(date),
-                  epi_date = paste0(epiy,"-",epiw)) |>
-    dplyr::group_by(epi_date, pcode) |>
-    dplyr::reframe(date = max(date),
-                   cases = max(cases),
-                   deaths = max(deaths),
-                   cfr_abs = max(deaths),
-                   attack_abs = max(attack_abs)
-                   ) |>
-    dplyr::distinct()
+db <- tar_read(ycc)
+
+dbpop <- db |>
+  ## generate population counts
+  dplyr::group_by(pcode) |>
+  dplyr::summarise(pop = median( cases/(attack_abs/1000)) )
+  
+a <- db |>
+  dplyr::left_join(dbpop, by = dplyr::join_by(pcode)) |>
+  dplyr::group_by(pcode) |>
+  dplyr::mutate(
+    dplyr::across(
+      cases:deaths,
+      ~ .x - dplyr::lag(.x, default = 4L),
+      .names = "{.col}_4w"
+    )) |>
+  dplyr::mutate(cfr_4w = deaths_4w / cases_4w,
+                attack_4w = cases_4w / pop
+                ) |>
+  dplyr::ungroup()
+  
+
+
+
 ```
 
 
