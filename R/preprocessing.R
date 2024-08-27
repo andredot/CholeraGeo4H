@@ -180,7 +180,9 @@ preprocess_ycc_lags <- function(db) {
 #'  the region configuration, either the outbreak is controlled
 #'  (level 0 - preparedness), cases are on the surge but with CFR
 #'  under the 1% threshold (level 1 - early action), or CFR is over
-#'  1%, signalling an unacceptable stress level (level 2 - response)
+#'  1%, signalling an unacceptable stress level (level 2 - response).
+#'  Level 2 is declared also if the attack rate in the previous 4
+#'  weeks has been higher that 2 per 1000 people.
 #'
 #' @export
 #'
@@ -194,7 +196,8 @@ cholera_status <- function(db) {
       status = dplyr::case_when(
         cases_4w <= 0 ~ 0,
         cfr_abs  <= 1 ~ 1,
-        cfr_abs  > 1  ~ 2
+        cfr_abs  > 1  ~ 2,
+        attack_4w >= 2  ~ 2
       )
     )
 

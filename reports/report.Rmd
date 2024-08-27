@@ -203,7 +203,7 @@ Exploration of temporal and geographical dynamics:
 
 -   Case Fatality and Attack rates need to be smoothened through a BYM Model. This will mask the effect of overdispersion and identify areas where CFR and AR are exceptionally high. Both variables are calculated in the previous three weeks (as in the OCHA paper [@drc_cholera]).
 
--   Each area is classified into three classes: either the outbreak is controlled (level 0 - preparedness), cases are on the surge but with CFR under the 1% threshold (level 1 - early action), or CFR is over 1%, signalling an unacceptable stress level (level 2 - response). This classification is calculated only on data available at that moment in time and is the target of prediction.
+-   Each area is classified into three classes: either the outbreak is controlled (level 0 - preparedness), cases are on the surge but with CFR under the 1% threshold (level 1 - early action), or CFR is over 1%, signalling an unacceptable stress level (level 2 - response). Level 2 is declared also if the attack rate in the previous 4 weeks has been higher that 2 per 1000 people. This classification is calculated only on data available at that moment in time and is the target of prediction.
 
 -   Two locations will be analysed for temporal correlation from a surge in cases in neighbouring districts through a Distributed Lag Model, identifying the best lead time for the following step. Pooled estimates are obtained to verify the temporal correlation of that with a meta-analytical approach.
 
@@ -269,6 +269,8 @@ The above figure shows different preprocessing steps, which are available as par
 
 -   Calculating the target variable and the 3-weekly CFR, new cases and attack rate, as per analytical plan.
 
+Fig 0a - NAs and missing value analysis
+
 ## Results
 
 You can get the results of your analyses by
@@ -277,7 +279,27 @@ You can get the results of your analyses by
 str(tar_read(ycc), 1)
 ```
 
-### Data exploration and visualisation - temporal trends
+### Data exploration and visualisation - univariate trends
+
+Fig 1a - gtsummary
+
+Fig 1b - same as 1c  but broken down by district
+
+Fig 1c - whole epidemic curve (4 panels with the 4 epi variables)
+
+Fig 1d - Three examples of different epi statuses situation w/colours 
+
+Fig 1e - distribution of new cases and new deaths
+
+Fig 1f - distribution of cfr and attack rate
+
+### Data exploration and visualisation - bidimensional trends
+
+Fig 2a - correlation between new cases and deaths
+
+Fig 2b - correlation between new cases and cfr
+
+Fig 2c - correlation between status and 4 epi variables (4 panels)
 
 ### Data exploration and visualisation - geospatial trends
 
