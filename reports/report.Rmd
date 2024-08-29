@@ -269,8 +269,6 @@ The above figure shows different preprocessing steps, which are available as par
 
 -   Calculating the target variable and the 3-weekly CFR, new cases and attack rate, as per analytical plan.
 
-Fig 0a - NAs and missing value analysis
-
 ## Results
 
 You can get the results of your analyses by
@@ -279,19 +277,60 @@ You can get the results of your analyses by
 str(tar_read(ycc), 1)
 ```
 
-### Data exploration and visualisation - univariate trends
+### Data exploration and visualisation - temporal trends
+
+Before starting data exploration, a summary table is necessary to have a quick glimpse at the data.
 
 Fig 1a - gtsummary
 
-Fig 1b - same as 1c  but broken down by district
+The 4 main variables to track a cholera outbreak are the number of cases, the attack rate, deaths and Case Fatality Rate. To have a general picture, the absolute values (since the start of the outbreak) are visualised, both by district and cumulative
 
-Fig 1c - whole epidemic curve (4 panels with the 4 epi variables)
+```{r, figures-1b-cases, fig.show="hold", out.width="50%"}
+#Fig 1b - same as 1c  but broken down by district
+tar_read(fig_1b_1)
+```
+
+```{r, figures-1b-ar, fig.show="hold", out.width="50%"}
+tar_read(fig_1b_2)
+```
+
+```{r, figures-1b-deaths, fig.show="hold", out.width="50%"}
+tar_read(fig_1b_3)
+```
+
+```{r, figures-1b-cfr, fig.show="hold", out.width="50%"}
+tar_read(fig_1b_4)
+```
+
+```{r, figures-1c-upper, fig.show="hold", out.width="50%"}
+#Fig 1c - whole epidemic curve (4 panels with the 4 epi variables)
+tar_read(fig_1c_1)
+tar_read(fig_1c_2)
+```
+
+```{r, figures-1c-lower, fig.show="hold", out.width="50%"}
+tar_read(fig_1c_3)
+tar_read(fig_1c_4)
+```
+
+Even if cumulative data are the standard way to collect those information, additional variables have been calculated in the pre-processing to show the cumulative ones only in the previous 4 weeks, which provide a different picture.
 
 Fig 1d - Three examples of different epi statuses situation w/colours 
 
-Fig 1e - distribution of new cases and new deaths
+In addition to that, the univariate distribution of the key epidemiological variables provide some additional information on its shape and variability across the database.
 
-Fig 1f - distribution of cfr and attack rate
+```{r, figures-1e, fig.show="hold", out.width="50%"}
+#Fig 1e - distribution of new cases and attack_rate
+tar_read(fig_1e_1)
+tar_read(fig_1e_2)
+```
+
+```{r, figures-1f, fig.show="hold", out.width="50%"}
+#Fig 1f - distribution of new_deaths and cfr
+tar_read(fig_1f_1)
+tar_read(fig_1f_2)
+```
+
 
 ### Data exploration and visualisation - bidimensional trends
 
@@ -301,9 +340,9 @@ Fig 2b - correlation between new cases and cfr
 
 Fig 2c - correlation between status and 4 epi variables (4 panels)
 
-### Data exploration and visualisation - geospatial trends
-
 ### BYM Models
+
+### Ecological Trends
 
 ## Discussion
 

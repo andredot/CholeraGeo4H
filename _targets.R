@@ -48,6 +48,59 @@ list(
   tar_target(yemen, yem_shp |> preprocess_join(yccwider)),
   tar_target(yemen_4w, yem_shp |>  preprocess_join(yccwider_lag)),
 
+  ## figures
+  tar_target(fig_1b_1, make_fig_1b(
+    ycc_lag, cases, color = "blue",
+    title = "Cholera cases per week")
+  ),
+  tar_target(fig_1b_2, make_fig_1b(
+    ycc_lag, attack_abs, color = "green",
+    title = "Cholera Attack rate (x1000) per week")
+  ),
+  tar_target(fig_1b_3, make_fig_1b(
+    ycc_lag, deaths, color = "black",
+    title = "Cholera deaths per week")
+  ),
+  tar_target(fig_1b_4, make_fig_1b(
+    ycc_lag, cfr_abs, color = "orange",
+    title = "Cholera Case Fatality Rate per week")
+  ),
+
+  tar_target(fig_1c_1, make_fig_1c(
+    ycc_lag, cases, color = "blue",
+    title = "Cholera cases per week")
+    ),
+  tar_target(fig_1c_2, make_fig_1c(
+    ycc_lag, attack_abs, color = "green",
+    title = "Cholera Attack rate (x1000) per week")
+  ),
+  tar_target(fig_1c_3, make_fig_1c(
+    ycc_lag, deaths, color = "black",
+    title = "Cholera deaths per week")
+  ),
+  tar_target(fig_1c_4, make_fig_1c(
+    ycc_lag, cfr_abs, color = "orange",
+    title = "Cholera Case Fatality Rate per week")
+  ),
+
+  tar_target(fig_1e_1, make_fig_1ef(
+    ycc_lag, cases_4w, color = "blue",
+    title = "Distribution of new Cholera cases")
+  ),
+  tar_target(fig_1e_2, make_fig_1ef(
+    ycc_lag, attack_4w, color = "green",
+    title = "Distribution of Cholera Attack rates")
+  ),
+  tar_target(fig_1f_1, make_fig_1ef(
+    ycc_lag, deaths_4w, color = "black",
+    title = "Distribution of new Cholera deaths")
+  ),
+  tar_target(fig_1f_2, make_fig_1ef(
+    ycc_lag, cfr_4w, color = "orange",
+    title = "Distribution of Cholera CFR")
+  ),
+
+
   ## Render reports
   tar_render(thesis, "reports/report.Rmd"),
 

@@ -11,55 +11,29 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Preliminary steps
 
-The project is written according to the LAIMS analysis template, thus most of the objects can be retrieved through Quarto.
+The project is written according to the LAIMS analysis template, thus most of the objects can be retrieved through Quarto. Also, relevant libraries are loaded.
 
 ```{r}
-db <- tar_read(ycc)
+tar_load(ycc)
+tar_load(ycc_lag)
+tar_load(yemen)
+tar_load(yemen_4w)
 
-dbpop <- db |>
-  ## generate population counts
-  dplyr::group_by(pcode) |>
-  dplyr::summarise(pop = median( cases/(attack_abs/1000)) )
-  
-a <- db |>
-  dplyr::left_join(dbpop, by = dplyr::join_by(pcode)) |>
-  dplyr::group_by(pcode) |>
-  dplyr::mutate(
-    dplyr::across(
-      cases:deaths,
-      ~ .x - dplyr::lag(.x, default = 4L),
-      .names = "{.col}_4w"
-    )) |>
-  dplyr::mutate(cfr_4w = deaths_4w / cases_4w,
-                cfr_4w = ifelse(cfr_4w == NaN, 0),
-                attack_4w = cases_4w / pop
-                ) |>
-  dplyr::ungroup()
-  
-tar_read(ycc_lag) |>
-  dplyr::mutate(
-    status = dplyr::case_when(
-      cases_4w <= 0 ~ 0,
-      cfr_abs  <= 1 ~ 1,
-      cfr_abs  > 1  ~ 2
-      )
-  )
-
-
+library(tidyverse)
+library(sf)
 ```
 
 
-Also, relevant libraries are loaded
+
 
 ```{r}
-library(tidyverse)
-ycc <- tar_read(ycc)
-yem_shp <- tar_read(yem_shp)
-yemen <- tar_read(yemen)
+ycc_lag |>
+  ggplot2::ggplot() +
+    ggplot2::geom_histogram(
+      ggplot2::aes(x = cases_4w), bins = 50, fill = "blue") +
+      ggplot2::labs(title = "Distribution of Cholera cases",
+           x = "", y = "")
 
-yemen |>
-  ggplot() +
-    geom_sf(aes(fill = ADM1_EN))
 ```
 
 Data should be grouped by the Epi-Week where they have been recorded.
