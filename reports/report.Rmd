@@ -315,7 +315,13 @@ tar_read(fig_1c_4)
 
 Even if cumulative data are the standard way to collect those information, additional variables have been calculated in the pre-processing to show the cumulative ones only in the previous 4 weeks, which provide a different picture.
 
-Fig 1d - Three examples of different epi statuses situation w/colours 
+```{r, figures-1d, fig.show="hold", out.width="33%"}
+# Fig 1d - Three examples of different epi statuses situation w/colours 
+tar_read(fig_1d_1) #Epi 2017-23 (early June)
+tar_read(fig_1d_2) #Epi 2017-23 (early September)
+tar_read(fig_1d_3) #Epi 2017-23 (early December)
+```
+
 
 In addition to that, the univariate distribution of the key epidemiological variables provide some additional information on its shape and variability across the database.
 

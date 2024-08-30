@@ -27,12 +27,19 @@ library(sf)
 
 
 ```{r}
-ycc_lag |>
+status_color <- function(status) {
+  dplyr::case_match(status,
+    0 ~ "green",
+    1 ~ "orange",
+    2 ~ "red"
+  )
+}
+
+yemen_4w |>
   ggplot2::ggplot() +
-    ggplot2::geom_histogram(
-      ggplot2::aes(x = cases_4w), bins = 50, fill = "blue") +
-      ggplot2::labs(title = "Distribution of Cholera cases",
-           x = "", y = "")
+  ggplot2::geom_sf(aes(fill = `status-2017-40`)) +
+  ggplot2::labs(title = "Cholera region Status") +
+  ggplot2::theme_light()
 
 ```
 

@@ -83,6 +83,24 @@ list(
     title = "Cholera Case Fatality Rate per week")
   ),
 
+  tar_target(fig_1d_1, make_fig_1d(
+    yemen_4w,
+    `status-2017-23`,
+    "Cholera status in early June")
+    ),
+
+  tar_target(fig_1d_2, make_fig_1d(
+    yemen_4w,
+    `status-2017-35`,
+    "Cholera status in early September")
+  ),
+
+  tar_target(fig_1d_3, make_fig_1d(
+    yemen_4w,
+    `status-2017-51`,
+    "Cholera status in early December")
+  ),
+
   tar_target(fig_1e_1, make_fig_1ef(
     ycc_lag, cases_4w, color = "blue",
     title = "Distribution of new Cholera cases")
