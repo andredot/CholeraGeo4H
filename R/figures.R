@@ -70,3 +70,26 @@ make_fig_1ef <- function(
     ggplot2::labs(title = title, subtitle = subtitle,
                   x = "", y = "")
 }
+
+make_fig_2ab <- function(db, varx, vary, title) {
+  db |>
+    ggplot2::ggplot(ggplot2::aes({{varx}}, {{vary}})) +
+    ggplot2::geom_bin2d() +
+    ggplot2::geom_smooth() +
+    ggplot2::scale_x_sqrt() +
+    ggplot2::scale_y_sqrt() +
+    ggplot2::labs(title = title, subtitle = "Axes are plotted in sqrt")
+}
+
+make_fig_2c <- function(db, varx, vary, labx, laby, title) {
+  db |>
+    ggplot2::ggplot(ggplot2::aes(
+      x = {{varx}},
+      y = {{vary}},
+      group = {{varx}},
+      color = {{varx}})) +
+    ggplot2::geom_dotplot(binaxis = "y", dotsize = 0.1, stackdir = "center") +
+    ggplot2::labs(title = title,
+                  x = labx, y = laby) +
+    ggplot2::theme(legend.position = "none")
+}

@@ -118,6 +118,35 @@ list(
     title = "Distribution of Cholera CFR")
   ),
 
+  tar_target(fig_2_a, make_fig_2ab(
+    ycc_lag, cases_4w, deaths_4w,
+    title = "Correlation between monthly Cholera cases and deaths")
+  ),
+  tar_target(fig_2_b, make_fig_2ab(
+    ycc_lag, cases_4w, cfr_4w,
+    title = "Correlation between monthly Cholera cases and CFR")
+  ),
+  tar_target(fig_2c_1, make_fig_2c(
+    ycc_lag, status, cases_4w,
+    "Status", "New cases (past month(",
+    "Correlation between Configuration Status and new cases")
+  ),
+  tar_target(fig_2c_2, make_fig_2c(
+    ycc_lag, status, deaths_4w,
+    "Status", "New deaths (past month)",
+    "Correlation between Configuration Status and new deaths")
+  ),
+  tar_target(fig_2c_3, make_fig_2c(
+    ycc_lag, status, attack_4w,
+    "Status", "Attack rate (past month)",
+    "Correlation between Configuration Status and attack rate")
+  ),
+  tar_target(fig_2c_4, make_fig_2c(
+    ycc_lag, status, cfr_4w,
+    "Status", "CFR (past month)",
+    "Correlation between Configuration Status and CFR")
+  ),
+
 
   ## Render reports
   tar_render(thesis, "reports/report.Rmd"),

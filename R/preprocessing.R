@@ -195,9 +195,8 @@ cholera_status <- function(db) {
     dplyr::mutate(
       status = dplyr::case_when(
         cases_4w <= 0 ~ 0,
-        cfr_abs  <= 1 ~ 1,
-        cfr_abs  > 1  ~ 2,
-        attack_4w >= 2  ~ 2
+        (cfr_abs  > 1) | (attack_4w >= 2)  ~ 2,
+        cfr_abs  <= 1 ~ 1
       )
     )
 

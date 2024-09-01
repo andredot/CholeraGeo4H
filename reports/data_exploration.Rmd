@@ -27,19 +27,16 @@ library(sf)
 
 
 ```{r}
-status_color <- function(status) {
-  dplyr::case_match(status,
-    0 ~ "green",
-    1 ~ "orange",
-    2 ~ "red"
-  )
-}
-
-yemen_4w |>
-  ggplot2::ggplot() +
-  ggplot2::geom_sf(aes(fill = `status-2017-40`)) +
-  ggplot2::labs(title = "Cholera region Status") +
-  ggplot2::theme_light()
+ycc_lag |>
+  ggplot2::ggplot(ggplot2::aes(
+    x = varx, 
+    y = vary,
+    group = varx, 
+    color = varx)) +
+  geom_dotplot(binaxis = "y", dotsize = 0.1, stackdir = "center") +
+  ggplot2::labs(title = title, 
+                x = labx, y = laby) + 
+  ggplot2::theme(legend.position = "none")
 
 ```
 

@@ -255,8 +255,8 @@ All data can be downloaded from [this website](https://data.humdata.org/dataset/
 
 The main tools for the whole project have been R Statistical Software [@rlanguage] and OpenBugs [@lunn_bugs_2009] for the Bayesian modelling. A GitHub repo has been created to facilitate version control and the laims.analysis template has been used. The template incorporates most of the libraries needed to reduce the pipeline creation and maintenance and isolates the whole project as a package. The complete pipeline can be seen in the image below.
 
-```{r} 
-targets::tar_visnetwork(targets_only = TRUE)
+```{r}
+targets::tar_visnetwork(targets_only = TRUE,exclude = starts_with("fig"))
 ```
 
 The above figure shows different preprocessing steps, which are available as part of the package:
@@ -269,97 +269,144 @@ The above figure shows different preprocessing steps, which are available as par
 
 -   Calculating the target variable and the 3-weekly CFR, new cases and attack rate, as per analytical plan.
 
-## Results
+## Results and discussion
 
-You can get the results of your analyses by
-
-```{r}
-str(tar_read(ycc), 1)
-```
-
-### Data exploration and visualisation - temporal trends
-
-Before starting data exploration, a summary table is necessary to have a quick glimpse at the data.
+Results and discussion follow the pipeline outlined above. Data integrity information is checked before proceeding in the results presentation.
 
 Fig 1a - gtsummary
 
-The 4 main variables to track a cholera outbreak are the number of cases, the attack rate, deaths and Case Fatality Rate. To have a general picture, the absolute values (since the start of the outbreak) are visualised, both by district and cumulative
+### Data exploration and visualisation - Temporal trends
 
-```{r, figures-1b-cases, fig.show="hold", out.width="50%"}
+The 4 main variables to track a cholera outbreak are the number of cases, the attack rate, deaths and Case Fatality Rate. To have a general picture, the absolute values (since the start of the outbreak) are visualised, both by district and cumulative.
+
+```{r, figures-1b-cases}
 #Fig 1b - same as 1c  but broken down by district
 tar_read(fig_1b_1)
 ```
 
-```{r, figures-1b-ar, fig.show="hold", out.width="50%"}
+Different dynamics are shown across the 21 governorates analyzed, with some of them (Abyan, Ad Dali, Shabwa, ...) that show a stop after the initial increase, while others that never managed to control the outbreaks (Dhamar, Sanaa both rural and city, Raymah,...).
+
+Another interesting phenomenon, is the sudden spikes into the first derivative, as it can be observed in Sanaa (rural), Hadramawt, or Shabwah, where the new cases are grouped in a short timeframe that is indicative of an immediate worsening of the situation.
+
+```{r, figures-1b-ar}
 tar_read(fig_1b_2)
 ```
 
-```{r, figures-1b-deaths, fig.show="hold", out.width="50%"}
+The attack rate is one of the fundamental variables that drive the resources needed to control an outbreak. Since it's calculated on the new cases and the population, attack rate follows a similar shape as the new cases, but it is the peak that is most indicative. Districts as Al Mahwit and Amran (AR = 75 per thousand) are across the most affected governorates, while in Sadah (AR = 12) and Hadramawt (AR = 1.5) most of the people managed to avoid the infection. Other drivers may explain that, as the limited testing due to volatile access conditions, but in general the Attack rate analysis shows different dynamics across the Country.
+
+```{r, figures-1b-deaths}
 tar_read(fig_1b_3)
 ```
 
-```{r, figures-1b-cfr, fig.show="hold", out.width="50%"}
-tar_read(fig_1b_4)
+Deaths are a hard outcome that is usually easy to report at the Health Facility level, compared to other indicators. Even in this case, there is great variability across the regions, spanning from only few recorded deaths (Sadah, Shabwah) to hundreds of them (Amran, Ibb, Taiz,...). Since cholera does not usually give permanent disabilities, death is the most important outcome to be monitored, but as for the absolute number of new cases, to understand the implication a new metric is needed.
+
+```{r, figures-1b-cfr}
+tar_read(fig_1b_4) +
+  geom_hline(yintercept = 1, color = "red")
 ```
+
+Case-Fatality Rate, apart from setting standards for the assistance provided (should be \<1%), is also a factor that shows the efficacy of the health system as a whole. In the dataset, it is shown the absolute CFR (from the start of the outbreak), so it's the only variable that is steadily decreasing. This, though, does not provide information on the moment by moment evolution of the outbreak.
+
+In addition to that, is notable that at the beginning of the outbreak in most of the regions, a spike is seen. This is due to a combination of factors: at the beginning, confirmed cases are low and are usually the worst in terms of clinical conditions. But also, scaling up the health systems capacity and risk communiction activities are effective ways to lower the overall mortality (and fatality, as well).
 
 ```{r, figures-1c-upper, fig.show="hold", out.width="50%"}
 #Fig 1c - whole epidemic curve (4 panels with the 4 epi variables)
 tar_read(fig_1c_1)
-tar_read(fig_1c_2)
+tar_read(fig_1c_2) +
+  geom_hline(yintercept = 1, color = "red")
 ```
+
+From a country level point of view, the Outbreak has never been controlled in the study period, probably due to the vulnerability factors outlined in the introduction. This is different from the governorates-level data, where the levelling off in some districts of the cases is a sign of a controlled outbreak. Most notably, deaths and CFR have an interesting behaviour that was not evident from the previous data: Deaths steadily increase until July 2024 with a steady growth rate (linear), but from then on the growth is slower.
 
 ```{r, figures-1c-lower, fig.show="hold", out.width="50%"}
 tar_read(fig_1c_3)
 tar_read(fig_1c_4)
 ```
 
-Even if cumulative data are the standard way to collect those information, additional variables have been calculated in the pre-processing to show the cumulative ones only in the previous 4 weeks, which provide a different picture.
-
-```{r, figures-1d, fig.show="hold", out.width="33%"}
-# Fig 1d - Three examples of different epi statuses situation w/colours 
-tar_read(fig_1d_1) #Epi 2017-23 (early June)
-tar_read(fig_1d_2) #Epi 2017-23 (early September)
-tar_read(fig_1d_3) #Epi 2017-23 (early December)
-```
-
-
-In addition to that, the univariate distribution of the key epidemiological variables provide some additional information on its shape and variability across the database.
+Even if cumulative data are the standard way to collect those information, additional variables have been calculated in the pre-processing to show the cumulative ones only in the previous 4 weeks, which provide a different picture, more representative of what happened in the previous month for that particular week.
 
 ```{r, figures-1e, fig.show="hold", out.width="50%"}
-#Fig 1e - distribution of new cases and attack_rate
+#Fig 1e - distribution of new cases and attack_rate  
 tar_read(fig_1e_1)
 tar_read(fig_1e_2)
 ```
 
 ```{r, figures-1f, fig.show="hold", out.width="50%"}
-#Fig 1f - distribution of new_deaths and cfr
-tar_read(fig_1f_1)
-tar_read(fig_1f_2)
+#Fig 1f - distribution of new_deaths and cfr  
+tar_read(fig_1f_1) 
+tar_read(fig_1f_2) +
+  scale_x_sqrt() +
+  xlim(-1,5) +
+  geom_vline(xintercept = 1, color = "red")
 ```
 
+All of the univariate distributions are left skewed, as it is usual for outbreaks (negative values in deaths are related to reporting errors). Combined, it shows a situation where in most of the districts for most of the times, the situation was managed in a way that avoided a humanitarian disaster. In fact, even in particular areas there were situations of dire humanitarian needs, the concerted efforts of the health autorities and international partners managed to contain the uncontrolled spread of the diseases.
 
-### Data exploration and visualisation - bidimensional trends
+```{r, figures-1d, fig.show="hold", out.width="33%"}
+# Fig 1d - Three examples of different epi statuses situation w/colours  
+tar_read(fig_1d_1) #Epi 2017-23 (early June) 
+tar_read(fig_1d_2) #Epi 2017-23 (early September) 
+tar_read(fig_1d_3) #Epi 2017-23 (early December)
+```
 
-Fig 2a - correlation between new cases and deaths
+From the key epidemiological variables, a general 3-coded status can be calculated. The cut-off has been defined within the scope of this work, without external validation (e.g., with government level risk assessment tools). Nevertheless, it uses similar definitions:
 
-Fig 2b - correlation between new cases and cfr
+-   A green area is an area without any new cases in the past four weeks (which is slightly shorter than the WHO standard of 40 days)
 
-Fig 2c - correlation between status and 4 epi variables (4 panels)
+-   A orange area is an area with an active outbreak where the health system is responding effectively
+
+-   A red area is an area where the health sytems resources are not enought to keep either the CFR under the 1% threshold (representing a situation where sick people access the proper care and the adequate number of cases is intercepted by healthcare staff), or an attack rate over 2 (x1000) signalling a high level of community transmission, or failure of the mitigation measures.
+
+Combined, the status provided in a glimpse the situation over the country. This is a useful target variable to predict, given the direct questions it can answer for managing humanitarian operations.
+
+### Data exploration and visualisation - Correlations
+
+As a preliminary step before checking additional modelling strategies, correlations with the key epidemiological variables is checked.
+
+```{r, figures-2a}
+#Fig 2a - correlation between new cases and deaths
+tar_read(fig_2_a) +
+  labs(x = "Cases", y = "Deaths")
+```
+
+A certains degree of correlation is expected between monthly cases and deaths for the different weeks. The linear model fitter on the bidimensional density plot. The correlation is stronger for higher number of new cases, and the trend is roughly linear. Since the disease takes time to kill an infected person, this initial result calls for a lagged correlation model to verify is that link is stronger.
+
+```{r, figures-2b}
+#Fig 2b - correlation between new cases and cfr
+tar_read(fig_2_b) +
+  ylim(-0.2,3)
+```
+
+The same pattern is not so evident for the Case Fatality Rate, even if higher nuber of cases is associated with a higher CFR in the same period. Even in this case, the preliminary model suggests a different approach incorporating lag considerations of a couple of weeks.
+
+```{r,figures-2c-upper, fig.show="hold", out.width="50%"}
+#Fig 2c - correlation between status and 4 epi variables (4 panels)
+tar_read(fig_2c_1)
+tar_read(fig_2c_2)
+```
+
+```{r,figures-2c-lower, fig.show="hold", out.width="50%"}
+#Fig 2c - correlation between status and 4 epi variables (4 panels)
+tar_read(fig_2c_3)
+tar_read(fig_2c_4)
+```
+
+The way the status variable was built forces a certain level of correlation among the variables. This is less evident for the first two variables (cases and deaths), since Attack rate and CFR are used to determine them.
 
 ### BYM Models
 
+### Time series
+
 ### Ecological Trends
 
-## Discussion
+## Conclusions
 
-You can also load and reuse objects
+To be written
 
 ```{r,eval=FALSE}
 tar_load(irrelevantResult)
 tar_load(relevantResult)
 ```
-
-Relevant results are:
 
 ## Acknowledgements {.appendix}
 
