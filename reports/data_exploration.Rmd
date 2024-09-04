@@ -27,16 +27,22 @@ library(sf)
 
 
 ```{r}
-ycc_lag |>
-  ggplot2::ggplot(ggplot2::aes(
-    x = varx, 
-    y = vary,
-    group = varx, 
-    color = varx)) +
-  geom_dotplot(binaxis = "y", dotsize = 0.1, stackdir = "center") +
-  ggplot2::labs(title = title, 
-                x = labx, y = laby) + 
-  ggplot2::theme(legend.position = "none")
+logRR <- logRRse <- vector("numeric", 10)
+
+for(i in seq(datalist)) {
+  sub <- subset(datalist[[i]], month %in% 6:9)
+  hw <- with(sub, rowSums(Lag(tmean > quantile(tmean, 0.95), 0:2)) >= 3) + 0
+  m <- glm(death ~ hw + ns(yday, 4) + ns(date, 2) + dow,
+    family=quasipoisson(), data=sub)
+  logRR[i] <- coef(m)["hw"]
+  logRRse[i] <- sqrt(vcov(m)["hw","hw"])
+}
+
+model <- glm(status ~ )
+
+```
+
+```{r}
 
 ```
 

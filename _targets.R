@@ -11,11 +11,8 @@ library(tarchetypes)
 # This is where you write
 # source("R/preprocessing.R")
 # source("R/figures.R")
+source("R/models.R")
 devtools::load_all()
-# if you keep your functions in external scripts.
-summarize_data <- function(dataset) {
-  summary(dataset)
-}
 
 # Set target-specific options such as packages:
 tar_option_set(packages = "utils") # nolint
@@ -48,6 +45,14 @@ list(
                                       cfr_4w, attack_4w, status)),
   tar_target(yemen, yem_shp |> preprocess_join(yccwider)),
   tar_target(yemen_4w, yem_shp |>  preprocess_join(yccwider_lag)),
+
+  ## Time series
+  tar_target(epi_conf, model_spline(ycc_lag)),
+  # tar_target(mod_cases, model_dlnm(ycc_lag, "cases_4w")),
+  # tar_target(mod_deaths, model_dlnm(ycc_lag, "deaths_4w")),
+  # tar_target(mod_cfr, model_dlnm(ycc_lag, "cfr_4w")),
+  # tar_target(mod_attack, model_dlnm(ycc_lag, "attack_4w")),
+  tar_target(log_epi, get_log_epi(ycc_lag)),
 
   ## figures
   tar_target(fig_1b_1, make_fig_1b(

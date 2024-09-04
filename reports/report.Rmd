@@ -58,7 +58,7 @@ htmltools::img(
 ```
 
 ```{r, include=FALSE}
-knitr::write_bib(file = 'packages.bib')
+knitr::write_bib(file = './reports/packages.bib')
 ```
 
 ```{r packages, include=FALSE}
@@ -87,7 +87,7 @@ A series of interventions is required to control cholera and to reduce deaths, w
 
 -   **Break the transmission chain** through community mobilisation and volunteer engagement in Branch Outbreak Response Teams. The interventions are developed to incorporate local culture, practices, and beliefs to promote good hygiene practices to prevent contamination or re-contamination.
 
--   **Lower mortality** through Oral Rehydration Solution distribution in established points (ORPs) or outposts. This is critical, as the local health system may not have the capacity to establish the required number of ORPs.
+-   **Lower mortality** through Oral Rehydration Solution distribution in established points (ORPs) or outposts. This is critical, as the local health system may not have the capacity to develop the required number of ORPs.
 
 -   **Oral Cholera Vaccination (OCV) campaigns**, whenever those are available through the Global OCV stockpile supported by Gavi, the Vaccine Alliance
 
@@ -115,11 +115,11 @@ Approximately 1.3 billion people are at risk for cholera in endemic countries. A
 
 ### Cholera Burden in Yemen
 
-According to the World Bank, Yemen is a lower-middle-income country with a population of more than 26 million. However, due to ongoing conflicts, its population health indicators are some of the lowest in the world[@wb].
+According to the World Bank, Yemen is a lower-middle-income country with a more than 26 million population. However, due to ongoing conflicts, its population health indicators are some of the lowest in the world[@wb].
 
 Yemen is considered a country where Cholera is endemic, given that cases are routinely observed. The Global burden of disease estimates 10.7 million people at risk, with an incidence rate (1000) of 1.64 and more than 17500 cases annually, a Case Fatality Rate of 3.2, and 561 deaths annually [@cholera_burden]. Cumulatively, between 2016 and 2021, more than 2.5 million cases were reported, including 4000 deaths [@echo_yemen].
 
-The current analysis focuses on the 2017-2018 outbreak, but even at the end of 2023, cholera cases surged in six governorates in Yemen. According to the DG ECHO, 80% of cases were among migrants [@echo_yemen]. Nonetheless, the Ministry of Public Health and Population in Aden declared the official outbreak at the national level only later. In March, there was an increase again in the northern governorates with over 6000 suspected cholera cases, 56 deaths (case fatality rate of 0.9%), and 47% of cases being clinically severe [@unicef_yemen]. In June 2024, the International Organisation on Migration (IOM) raised concerns over 30,000 suspected cases, with the potential of reaching 255,000 by September 2024 if preparedness and response activities are not scaled up [@iom_yemen].
+The current analysis focuses on the 2017-2018 outbreak, but even at the end of 2023, cholera cases surged in six governorates in Yemen. According to the DG ECHO, 80% of cases were among migrants [@echo_yemen]. Nonetheless, the Ministry of Public Health and Population in Aden declared the official outbreak at the national level only later. In March, there was an increase again in the northern governorates with over 6000 suspected cholera cases, 56 deaths (case fatality rate of 0.9%), and 47% of cases being clinically severe [@unicef_yemen]. In June 2024, the International Organisation on Migration (IOM) raised concerns over 30,000 suspected cases, potentially reaching 255,000 by September 2024 if preparedness and response activities are not scaled up [@iom_yemen].
 
 Yemen experienced the most significant reported cholera outbreak in recent history, from 2016 to 2022. The analysis focuses on a short period for which epidemiological data are available. The main driver has been a protracted civil war, which damaged the already vulnerable health and WASH infrastructure. Chronic malnutrition, cyclical floods, and drought episodes have compounded this[@one_health].
 
@@ -127,7 +127,7 @@ Yemen experienced the most significant reported cholera outbreak in recent histo
 
 The situation worsened in late 2016, as seen from the Chart. This resulted in more than 16 million people without essential services and more than 2 million IDPs being forced to live in deprived and harsh environments. This contributed to a sustained number of cases, probably due to groundwater contamination and a general lack of safe drinking water in the country [@one_health]. A national electronic Disease Early Warning System (eDEWS) was established in 2016 and used together with the Bulletin of the Yemen Ministry of Health to monitor the evolution of the outbreak, providing a reliable source of data even if not always timely due to the ongoing conflict [@ews_yemen].
 
-Increased rainfall, flooding, and a particularly strong El Niño and winds may have further contaminated water sources in Yemen and aided the spread of cholera-contaminated flying insects (chironomids) from the Horn of Africa to Yemen [@paz_cholera_2019].
+Increased rainfall, flooding, and a powerful El Niño and winds may have further contaminated water sources in Yemen and aided the spread of cholera-contaminated flying insects (chironomids) from the Horn of Africa to Yemen [@paz_cholera_2019].
 
 ### Anticipatory Action
 
@@ -153,11 +153,11 @@ Even if the attention is great on Anticipatory Action for Epidemics, only a few 
 
 Health hazards differ from weather-related ones in different ways:
 
--   Risk Analysis and Early Warning systems in the health sector are radically differentsince forecasting models are of a different nature. Also, it is widespread in the Health sector to base clinical and public health decisions on risk assessment tools instead of relying on hard thresholds. This is done to enable contextual information, difficult to capture in triggers, to be part of the decision process [@who_risk]
+-   Risk Analysis and Early Warning systems in the health sector are radically different since forecasting models are of a different nature. Also, it is widespread in the Health sector to base clinical and public health decisions on risk assessment tools instead of relying on hard thresholds. This is done to enable contextual information, difficult to capture in triggers, to be part of the decision process [@who_risk]
 
--   Political sensitivity of activation, which makes relying on historical data difficult, given both the delays in reporting and the different capacity of health systems to report
+-   The political sensitivity of activation, which makes relying on historical data difficult, given both the delays in reporting and the different capacity of health systems to report
 
--   Early Actions are interlinked with the disaster impact. In fact, while for cyclones AA can reduce the impact, for Epidemics the number of cases itself depend on the Early Actions, thus changing the disaster
+-   Early Actions are interlinked with the disaster impact. While for cyclones AA can reduce the impact, for Epidemics, the number of cases itself depends on the Early Actions, thus changing the disaster
 
 In 2021, World Health Organization (WHO), UNICEF, the International Organization for Migration (IOM), as well as scientists and researchers from the medical, public health, and climate communities are working to test if anticipatory action can stop an outbreak from becoming a crisis in Yemen, Mozambique, and the Democratic Republic of the Congo. The pilot initiative, part of a larger portfolio to scale up anticipatory action, is co-sponsored by the UN Office for the Coordination of Humanitarian Affairs (OCHA), the Global Task Force on Cholera Control (GTFCC), the Risk-Informed Early Action Partnership (REAP), the UK Government, and the Red Cross, and financed by the UN Central Emergency Response Fund (CERF) [@aa_health2].
 
@@ -396,6 +396,137 @@ The way the status variable was built forces a certain level of correlation amon
 ### BYM Models
 
 ### Time series
+
+There are several methods to control for long-term and seasonal patterns in time series studies. Given the limited number of years, no seasonality can be modelled. The long-term component is added to the model since the cases' growth was slowly increasing. It is expected to be non-linear by applying splines to model smooth temporal trends, initially with 5 degrees of freedom for each year of data.
+
+```{r}
+tar_read(epi_conf)
+```
+
+The initial model is a more sofisticated version of the plot shown above, with a clear indication that the epidemiological variables and the temporal components have an effect on the outcome. This association is not very strong, as the residual deviance is still similar to the Null one. Thus, it is not easy to determine the status from the original variables, but that is expected, since the presented model does not take into account any lag effect or geographical considerations.
+
+In the second iteration, the association between the Status and the four epidemiological variables (in the previous month) is evaluated, accounting for lagged associations up to four weeks. A bi-dimensional exposure-lag-response function is defined (cross-basis), with 4 different models which can be fit from them.
+
+```{r,figures-3a-1, fig.show="hold", out.width="50%"}
+tar_load(ycc_lag)
+cb_cases <- dlnm::crossbasis(
+  ycc_lag["cases_4w"],
+  lag=4,
+  argvar=list(fun="lin"),
+  arglag=list(fun="integer")
+)
+spltime <- splines::bs(ycc_lag$date, df=2*3)
+mod_cases <- glm(status ~ cb_cases + spltime,
+                 family=quasipoisson(),
+                 ycc_lag)
+
+cp_cases <- dlnm::crosspred(cb_cases, mod_cases, at=0:6000, by=10)
+plot(cp_cases, "slices", var=1200, ci="bars", pch=19, col=2, main="Alternative lag-response functions at Cases = 1200")
+plot(cp_cases, "overall", ci="lines", col=2, lty=2,
+      main="Overall cumulative association", lwd=2, xlab="New cases")
+
+```
+
+```{r,figures-3a-2, eval = FALSE, fig.show="hold", out.width="50%"}
+cb_deaths <- dlnm::crossbasis(
+  ycc_lag["deaths_4w"],
+  lag=4,
+  argvar=list(fun="lin"),
+  arglag=list(fun="integer")
+)
+spltime <- splines::bs(ycc_lag$date, df=2*3)
+mod_deaths <- glm(status ~ cb_deaths + spltime,
+                 family=quasipoisson(),
+                 ycc_lag)
+
+cp_deaths <- dlnm::crosspred(cb_deaths, mod_deaths, at=0:50, by=1)
+plot(cp_deaths, "slices", var=20, ci="bars", pch=19, col=2, main="Alternative lag-response functions at Deaths = 20")
+plot(cp_deaths, "overall", ci="lines", col=2, lty=2,
+      main="Overall cumulative association", lwd=2, xlab="New deaths")
+
+```
+
+```{r,figures-3a-3,eval = FALSE, fig.show="hold", out.width="50%"}
+cb_cfr <- dlnm::crossbasis(
+  ycc_lag["cfr_4w"],
+  lag=4,
+  argvar=list(fun="lin"),
+  arglag=list(fun="integer")
+)
+spltime <- splines::bs(ycc_lag$date, df=2*3)
+mod_cfr <- glm(status ~ cb_cfr + spltime,
+                 family=quasipoisson(),
+                 ycc_lag)
+
+cp_cfr <- dlnm::crosspred(cb_cfr, mod_cfr, at=0:5, by=0.1)
+plot(cp_cfr, "slices", var=1, ci="bars", pch=19, col=2, main="Alternative lag-response functions at CFR = 1")
+plot(cp_cfr, "overall", ci="lines", col=2, lty=2,
+      main="Overall cumulative association", lwd=2, xlab="CFR")
+
+```
+
+```{r,figures-3a-4,eval = FALSE, fig.show="hold", out.width="50%"}
+cb_ar <- dlnm::crossbasis(
+  ycc_lag["attack_4w"],
+  lag=4,
+  argvar=list(fun="lin"),
+  arglag=list(fun="integer")
+)
+spltime <- splines::bs(ycc_lag$date, df=2*3)
+mod_ar <- glm(status ~ cb_ar + spltime,
+                 family=quasipoisson(),
+                 ycc_lag)
+
+cp_attack <- dlnm::crosspred(cb_ar, mod_ar, at=0:5, by=0.05)
+plot(cp_attack, "slices", var=3, ci="bars", pch=19, col=2, main="Alternative lag-response functions at Attack Rate = 3")
+plot(cp_attack, "overall", ci="lines", col=2, lty=2,
+      main="Overall cumulative association", lwd=2, xlab="Attack rate")
+```
+
+The effect at a particular cut-off and the overall cumulative association are shown. None of the charts contain any significant result for any lag of 1 week or more. Thus, modelling only from epidemiological variables is insufficient to accurately predict the status. In addition to that, the residual deviance from the models (not shown) is similar to the initial model, without any benefit in the residual variance from the additional lag considerations.
+
+Last iteration is to verify the association at the single governorate level, a due stage approach is used:
+
+-   A regression model in which the association of interest is estimated in each location, identical to the first model developed above;
+
+-   A meta-analysis to pool the estimates across locations.
+
+This does not take into consideration to effect of geographical proximity, only the temporal association across the estimates.
+
+```{r,figures-3b, fig.show="hold", out.width="33%"}
+tar_load(log_epi)
+regs <- log_epi[["Governorate"]] |> unique()
+
+uni_cases <- metafor::rma(
+  yi=log_epi[["Cases"]], 
+  sei=log_epi[["CasesSE"]],
+  slab=regs,
+  measure="RR"
+  )
+metafor::forest(uni_cases, transf=exp, refline=1, pch=23, bg=4, col=2,
+  main="New cases and Status")
+
+uni_deaths <- metafor::rma(
+  yi=log_epi[["Deaths"]], 
+  sei=log_epi[["DeathsSE"]],
+  slab=regs,
+  measure="RR"
+  )
+metafor::forest(uni_deaths, transf=exp, refline=1, pch=23, bg=4, col=2,
+  main="New deaths and Status")
+
+uni_cfr <- metafor::rma(
+  yi=log_epi[["CFR"]], 
+  sei=log_epi[["CFRSE"]],
+  slab=regs,
+  measure="RR"
+  )
+metafor::forest(uni_cfr, transf=exp, refline=1, pch=23, bg=4, col=2,
+  main="CFR and Status")
+
+```
+
+Even in this case, no significant result is obtained. The different strengths of associations across the district, each for the epidemiological variables are not strong enough to explain a change in Status.
 
 ### Ecological Trends
 
