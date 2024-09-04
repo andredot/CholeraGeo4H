@@ -11,50 +11,39 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Preliminary steps
 
-The project is written according to the LAIMS analysis template, thus most of the objects can be retrieved through Quarto.
+The project is written according to the LAIMS analysis template, thus most of the objects can be retrieved through Quarto. Also, relevant libraries are loaded.
 
 ```{r}
-db <- tar_read(data_raw)
-  db |>
-    ## Change Column names
-    dplyr::select(-c("COD Gov English",
-                     "COD Gov Arabic")) |>
-    dplyr::rename(
-      date = Date,
-      govt = Governorate,
-      cases = Cases,
-      deaths = Deaths,
-      cfr_abs = `CFR (%)`,
-      attack_abs = `Attack Rate (per 1000)`,
-      pcode = `COD Gov Pcode`
-    ) |>
-    ## Group by Week
-    dplyr::mutate(govt = as.factor(govt),
-                  epiw = lubridate::epiweek(date),
-                  epiy = lubridate::epiyear(date),
-                  epi_date = paste0(epiy,"-",epiw)) |>
-    dplyr::group_by(epi_date, pcode) |>
-    dplyr::reframe(date = max(date),
-                   cases = max(cases),
-                   deaths = max(deaths),
-                   cfr_abs = max(deaths),
-                   attack_abs = max(attack_abs)
-                   ) |>
-    dplyr::distinct()
+tar_load(ycc)
+tar_load(ycc_lag)
+tar_load(yemen)
+tar_load(yemen_4w)
+
+library(tidyverse)
+library(sf)
 ```
 
 
-Also, relevant libraries are loaded
+
 
 ```{r}
-library(tidyverse)
-ycc <- tar_read(ycc)
-yem_shp <- tar_read(yem_shp)
-yemen <- tar_read(yemen)
+logRR <- logRRse <- vector("numeric", 10)
 
-yemen |>
-  ggplot() +
-    geom_sf(aes(fill = ADM1_EN))
+for(i in seq(datalist)) {
+  sub <- subset(datalist[[i]], month %in% 6:9)
+  hw <- with(sub, rowSums(Lag(tmean > quantile(tmean, 0.95), 0:2)) >= 3) + 0
+  m <- glm(death ~ hw + ns(yday, 4) + ns(date, 2) + dow,
+    family=quasipoisson(), data=sub)
+  logRR[i] <- coef(m)["hw"]
+  logRRse[i] <- sqrt(vcov(m)["hw","hw"])
+}
+
+model <- glm(status ~ )
+
+```
+
+```{r}
+
 ```
 
 Data should be grouped by the Epi-Week where they have been recorded.
