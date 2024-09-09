@@ -14,9 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 The project is written according to the LAIMS analysis template, thus most of the objects can be retrieved through Quarto. Also, relevant libraries are loaded.
 
 ```{r}
-tar_load(ycc)
 tar_load(ycc_lag)
-tar_load(yemen)
 tar_load(yemen_4w)
 
 library(tidyverse)
@@ -27,23 +25,31 @@ library(sf)
 
 
 ```{r}
-logRR <- logRRse <- vector("numeric", 10)
-
-for(i in seq(datalist)) {
-  sub <- subset(datalist[[i]], month %in% 6:9)
-  hw <- with(sub, rowSums(Lag(tmean > quantile(tmean, 0.95), 0:2)) >= 3) + 0
-  m <- glm(death ~ hw + ns(yday, 4) + ns(date, 2) + dow,
-    family=quasipoisson(), data=sub)
-  logRR[i] <- coef(m)["hw"]
-  logRRse[i] <- sqrt(vcov(m)["hw","hw"])
-}
-
-model <- glm(status ~ )
+ycc_lag |>
+  dplyr::group_by(epi_date) |>
+  dplyr::mutate(
+    # Expected counts
+    cases_exp = cases * ( sum(cases)/ sum(pop)),
+    deaths_exp = cases * ( sum(deaths)/ sum(pop)),
+    cfr_exp = deaths_exp / cases_exp,
+    attack_exp = cases_exp / pop,
+    # Target variable
+    target_status = lead(status)
+  ) |>
+  dplyr::filter(epi_date == "2017-51") 
 
 ```
 
 ```{r}
-
+d <- tar_read(yemen_4w) |>
+  dplyr::select("status-2018-1","cases_exp-2017-51",
+                "attack_exp-2017-51","status-2017-51") |>
+    dplyr::rename(
+      "target_status[]" = "status-2018-1",
+      "cases_exp[]" = "cases_exp-2017-51",
+      "attack_exp[]" = "attack_exp-2017-51",
+      "status[]" = "status-2017-51")
+d <- format(d$`attack_exp[]`, scientific = FALSE)
 ```
 
 Data should be grouped by the Epi-Week where they have been recorded.

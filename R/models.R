@@ -112,3 +112,35 @@ get_log_epi <- function(db) {
 
   log_epi
 }
+
+model_0 <- function(db) {
+  glm(target_status ~ cases_exp + status,
+      family = poisson,
+      data = db)
+}
+
+pred_models <- function(db, mod0, mod1, mod2) {
+  db |>
+    dplyr::mutate(pois0 = predict(mod0) / exp,
+           bym_cases = predict(mod1) / exp,
+           bym_attack = predict(mod2) / exp
+           )
+}
+
+save_data <- function(db) {
+  exp <- db |>
+    sf::st_drop_geometry() |>
+    dplyr::select("status-2018-1","cases_exp-2017-51",
+                  "attack_exp-2017-51","status-2017-51") |>
+    dplyr::rename(
+      "target_status[]" = "status-2018-1",
+      "cases_exp[]" = "cases_exp-2017-51",
+      "attack_exp[]" = "attack_exp-2017-51",
+      "status[]" = "status-2017-51")
+  exp$"attack_exp[]" <- format(exp$`attack_exp[]`, scientific = FALSE,
+                              na.encode = NA)
+  exp |>
+    readr::write_delim("./openbugs/data_201751.txt", delim = " ")
+
+  cat("END", file="./openbugs/data_201751.txt", append=TRUE, sep = "\n")
+}

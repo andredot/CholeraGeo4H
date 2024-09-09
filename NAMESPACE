@@ -3,3 +3,4 @@
 export(cholera_status)
 export(preprocess_ycc)
 export(preprocess_ycc_lags)
+export(ycc_exp)

@@ -345,8 +345,8 @@ All of the univariate distributions are left skewed, as it is usual for outbreak
 ```{r, figures-1d, fig.show="hold", out.width="33%"}
 # Fig 1d - Three examples of different epi statuses situation w/colours  
 tar_read(fig_1d_1) #Epi 2017-23 (early June) 
-tar_read(fig_1d_2) #Epi 2017-23 (early September) 
-tar_read(fig_1d_3) #Epi 2017-23 (early December)
+tar_read(fig_1d_2) #Epi 2017-35 (early September) 
+tar_read(fig_1d_3) #Epi 2017-51 (early December)
 ```
 
 From the key epidemiological variables, a general 3-coded status can be calculated. The cut-off has been defined within the scope of this work, without external validation (e.g., with government level risk assessment tools). Nevertheless, it uses similar definitions:
@@ -393,8 +393,6 @@ tar_read(fig_2c_4)
 
 The way the status variable was built forces a certain level of correlation among the variables. This is less evident for the first two variables (cases and deaths), since Attack rate and CFR are used to determine them.
 
-### BYM Models
-
 ### Time series
 
 There are several methods to control for long-term and seasonal patterns in time series studies. Given the limited number of years, no seasonality can be modelled. The long-term component is added to the model since the cases' growth was slowly increasing. It is expected to be non-linear by applying splines to model smooth temporal trends, initially with 5 degrees of freedom for each year of data.
@@ -421,13 +419,13 @@ mod_cases <- glm(status ~ cb_cases + spltime,
                  ycc_lag)
 
 cp_cases <- dlnm::crosspred(cb_cases, mod_cases, at=0:6000, by=10)
-plot(cp_cases, "slices", var=1200, ci="bars", pch=19, col=2, main="Alternative lag-response functions at Cases = 1200")
+plot(cp_cases, "slices", var=3000, ci="bars", pch=19, col=2, main="Alternative lag-response functions at Cases = 1200")
 plot(cp_cases, "overall", ci="lines", col=2, lty=2,
       main="Overall cumulative association", lwd=2, xlab="New cases")
 
 ```
 
-```{r,figures-3a-2, eval = FALSE, fig.show="hold", out.width="50%"}
+```{r,figures-3a-2, fig.show="hold", out.width="50%"}
 cb_deaths <- dlnm::crossbasis(
   ycc_lag["deaths_4w"],
   lag=4,
@@ -446,7 +444,7 @@ plot(cp_deaths, "overall", ci="lines", col=2, lty=2,
 
 ```
 
-```{r,figures-3a-3,eval = FALSE, fig.show="hold", out.width="50%"}
+```{r,figures-3a-3, fig.show="hold", out.width="50%"}
 cb_cfr <- dlnm::crossbasis(
   ycc_lag["cfr_4w"],
   lag=4,
@@ -465,7 +463,7 @@ plot(cp_cfr, "overall", ci="lines", col=2, lty=2,
 
 ```
 
-```{r,figures-3a-4,eval = FALSE, fig.show="hold", out.width="50%"}
+```{r,figures-3a-4, fig.show="hold", out.width="50%"}
 cb_ar <- dlnm::crossbasis(
   ycc_lag["attack_4w"],
   lag=4,
@@ -529,6 +527,83 @@ metafor::forest(uni_cfr, transf=exp, refline=1, pch=23, bg=4, col=2,
 Even in this case, no significant result is obtained. The different strengths of associations across the district, each for the epidemiological variables are not strong enough to explain a change in Status.
 
 ### Ecological Trends
+
+Modelling ecological trends requires the definition of the proper target variable. In each particular week, the model will try to predict the status of that particular district in the following one (so with a one week lag).
+
+Three models are tested, with different epidemiological variables (either cases or attack rate, as they were the only ones in the previous section to show some kind of cumulative association) and the status of the districts as covariates. To provide a reference, a poisson-gamma model with no spatial consideration is used as a reference.
+
+#### Model 0 - no spatial component
+
+The first model is a simple Poisson-gamma model with no spatial consideration. Variables are the expected number of cases and the status in the previous week, to predict the status in the following one.
+
+```{r}
+tar_read(mod0) |> summary()
+```
+
+The results, despite showing a significative association for both of the variables, are non-indicative as per their own and are to be considered as a baseline.
+
+#### Model 1 - Cases
+
+The first BYM Model is similar to the former one, but with additional spatial considerations.
+
+Since this is a pilot project, due to computational complexity, only the BYM model for Early December (Epi week 2017-51) is run.
+
+```{odc}
+model
+{
+	for (i in 1 : 21)
+	{
+			target_status[i]  ~ dpois(mu[i])
+			log(mu[i]) <- log(cases_exp[i]) + alpha0 + b.ete[i] + b.clu[i] + alpha1*status[i]
+			rr[i] <- exp(alpha0+b.ete[i]+b.clu[i]) 
+			b.ete[i]~dnorm(0,tau.ete)
+			post[i]<-step(rr[i]-1)
+	}
+	
+	b.clu[1:21] ~ car.normal(adj[], weights[],num[],tau.clu)
+	
+	sd.clu<-sd(b.clu[])
+	sd.ete<-sd(b.ete[])
+	
+	alpha0  ~ dflat()
+	alpha1  ~ dnorm(0, 0.0001)
+	tau.ete ~ dgamma(0.5,0.0005)
+	sigma.ete <-sqrt(1/tau.ete)
+	tau.clu ~ dgamma(0.5,0.0005)
+	sigma.clu <-sqrt(1/tau.clu)
+}
+```
+
+
+
+
+#### Model 2 - Attack rate
+
+```{odc}
+model
+{
+	for (i in 1 : 21)
+	{
+			target_status[i]  ~ dpois(mu[i])
+			log(mu[i]) <- log(cases_exp[i]) + alpha0 + b.ete[i] + b.clu[i] + alpha1*status[i]
+			rr[i] <- exp(alpha0+b.ete[i]+b.clu[i]) 
+			b.ete[i]~dnorm(0,tau.ete)
+			post[i]<-step(rr[i]-1)
+	}
+	
+	b.clu[1:21] ~ car.normal(adj[], weights[],num[],tau.clu)
+	
+	sd.clu<-sd(b.clu[])
+	sd.ete<-sd(b.ete[])
+	
+	alpha0  ~ dflat()
+	alpha1  ~ dnorm(0, 0.0001)
+	tau.ete ~ dgamma(0.5,0.0005)
+	sigma.ete <-sqrt(1/tau.ete)
+	tau.clu ~ dgamma(0.5,0.0005)
+	sigma.clu <-sqrt(1/tau.clu)
+}
+```
 
 ## Conclusions
 
