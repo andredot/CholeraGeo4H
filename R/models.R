@@ -137,8 +137,7 @@ save_data <- function(db) {
       "cases_exp[]" = "cases_exp-2017-51",
       "attack_exp[]" = "attack_exp-2017-51",
       "status[]" = "status-2017-51")
-  exp$"attack_exp[]" <- format(exp$`attack_exp[]`, scientific = FALSE,
-                              na.encode = NA)
+  exp$"attack_exp[]" <- format(exp$`attack_exp[]`, scientific = FALSE)
   exp |>
     readr::write_delim("./openbugs/data_201751.txt", delim = " ")
 
