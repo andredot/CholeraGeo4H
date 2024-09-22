@@ -28,6 +28,14 @@ import_data <- function(.data_path) {
     readr::read_csv()
 }
 
+import_openbugs <- function(.data_path) {
+  file.path(.data_path) |>
+    normalizePath() |>
+    readr::read_tsv()|>
+    dplyr::select(2:10) |>
+    dplyr::rename("coefficient" = "...2")
+}
+
 import_shape <- function(.data_path) {
   file.path(.data_path) |>
     normalizePath() |>
@@ -37,6 +45,7 @@ import_shape <- function(.data_path) {
 #' Preprocessing of Yemen Cholera cases
 #'
 #' @param db : dataframe obtained by the Yemen Cholera cases csv
+#' @param shp: a shapefile of the country
 #'
 #' @return a new db with
 #' - clean column names,
@@ -120,16 +129,14 @@ join_wider <- function(db1, db2, db3, db4,
     dplyr::left_join(db3, by = dplyr::join_by(pcode)) |>
     dplyr::left_join(db4, by = dplyr::join_by(pcode))
 
-  ifelse( "tbl" %in% class(db5),
-          t <- t |> dplyr::left_join(db5, by = dplyr::join_by(pcode))
-  )
+  if( "tbl" %in% class(db5))
+    t <- t |> dplyr::left_join(db5, by = dplyr::join_by(pcode))
 
-  ifelse( "tbl" %in% class(db6),
-          t <- t |> dplyr::left_join(db6, by = dplyr::join_by(pcode))
-  )
-  ifelse( "tbl" %in% class(db7),
-          t <- t |> dplyr::left_join(db7, by = dplyr::join_by(pcode))
-  )
+  if( "tbl" %in% class(db6))
+    t <- t |> dplyr::left_join(db6, by = dplyr::join_by(pcode))
+
+  if( "tbl" %in% class(db7))
+    t <- t |> dplyr::left_join(db7, by = dplyr::join_by(pcode))
 
   return(t)
 }
@@ -221,7 +228,7 @@ cholera_status <- function(db) {
 #' @export
 #'
 #' @examples
-#' #' \dontrun{
+#' \dontrun{
 #'   ycc_exp(ycc_lag)
 #' }
 ycc_exp <- function(db) {

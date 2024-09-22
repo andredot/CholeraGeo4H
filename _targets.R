@@ -68,6 +68,11 @@ list(
   # tar_target(mod2, model_2(ycc_exp)),
   # tar_target(ycc_pred, pred_models(ycc_exp, mod0, mod1, mod2)),
 
+  ## Openbudgs
+  tar_target(mod1_alphas, import_openbugs("./openbugs/mod1_alpha.txt")),
+  tar_target(mod2_alphas, import_openbugs("./openbugs/mod2_alpha.txt")),
+  tar_target(mod1_rr, import_openbugs("./openbugs/mod1_rr.txt")),
+  tar_target(mod2_rr, import_openbugs("./openbugs/mod2_rr.txt")),
 
   ## Figures
   tar_target(fig_1b_1, make_fig_1b(
@@ -176,7 +181,7 @@ list(
              dput(adj_list(yem_shp),
                   file = "./openbugs/adj_list.txt",
                   control = "niceNames")),
-  tar_force(init_list_1,
+  tar_target(init_list_1,
              list( tau.ete = 1,
                    tau.clu = 1,
                    alpha0 = 0,
@@ -184,7 +189,6 @@ list(
                    b.clu = rep(0, 21),
                    alpha1 = 0.5) |>
                dput(file = "./openbugs/init_list_1.txt",
-                    control = "niceNames"),
-            force=1),
-  tar_force(data_model, save_data(yemen_4w), force = 1)
+                    control = "niceNames")),
+  tar_target(data_model, save_data(yemen_4w))
 )
