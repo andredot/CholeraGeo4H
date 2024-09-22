@@ -1,0 +1,23 @@
+model
+{
+	for (i in 1 : 21)
+	{
+			target_status[i]  ~ dpois(mu[i])
+			log(mu[i]) <- log(attack_exp[i]) + alpha0 + b.ete[i] + b.clu[i] + alpha1*status[i]
+			rr[i] <- exp(alpha0+b.ete[i]+b.clu[i]) 
+			b.ete[i]~dnorm(0,tau.ete)
+			post[i]<-step(rr[i]-1)
+	}
+	
+	b.clu[1:21] ~ car.normal(adj[], weights[],num[],tau.clu)
+	
+	sd.clu<-sd(b.clu[])
+	sd.ete<-sd(b.ete[])
+	
+	alpha0  ~ dflat()
+	alpha1  ~ dnorm(0, 0.0001)
+	tau.ete ~ dgamma(0.5,0.0005)
+	sigma.ete <-sqrt(1/tau.ete)
+	tau.clu ~ dgamma(0.5,0.0005)
+	sigma.clu <-sqrt(1/tau.clu)
+}

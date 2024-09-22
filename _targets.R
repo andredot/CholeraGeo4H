@@ -11,7 +11,7 @@ library(tarchetypes)
 # This is where you write
 # source("R/preprocessing.R")
 # source("R/figures.R")
-source("R/models.R")
+# source("R/models.R")
 devtools::load_all()
 
 # Set target-specific options such as packages:
@@ -40,11 +40,19 @@ list(
   tar_target(attack_4w, preprocess_split(ycc_lag, "attack_4w")),
   tar_target(status, preprocess_split(ycc_lag, "status")),
 
+  tar_target(cases_exp, preprocess_split(ycc_exp, "cases_exp")),
+  tar_target(attack_exp, preprocess_split(ycc_exp, "attack_exp")),
+
   tar_target(yccwider, join_wider(cases, deaths,cfr_abs,attack_abs)),
   tar_target(yccwider_lag, join_wider(cases_4w, deaths_4w,
-                                      cfr_4w, attack_4w, status)),
+                                      cfr_4w, attack_4w, status,
+                                      cases_exp, attack_exp)),
   tar_target(yemen, yem_shp |> preprocess_join(yccwider)),
   tar_target(yemen_4w, yem_shp |>  preprocess_join(yccwider_lag)),
+
+  tar_target(ycc_exp, ycc_exp(ycc_lag)),
+  tar_target(ycc_51, ycc_exp |>
+               dplyr::filter(epi_date == "2017-51")),
 
   ## Time series
   tar_target(epi_conf, model_spline(ycc_lag)),
@@ -54,7 +62,19 @@ list(
   # tar_target(mod_attack, model_dlnm(ycc_lag, "attack_4w")),
   tar_target(log_epi, get_log_epi(ycc_lag)),
 
-  ## figures
+  ## Ecological regression
+  tar_target(mod0, model_0(ycc_exp)),
+  # tar_target(mod1, model_1(ycc_exp)),
+  # tar_target(mod2, model_2(ycc_exp)),
+  # tar_target(ycc_pred, pred_models(ycc_exp, mod0, mod1, mod2)),
+
+  ## Openbudgs
+  tar_target(mod1_alphas, import_openbugs("./openbugs/mod1_alpha.txt")),
+  tar_target(mod2_alphas, import_openbugs("./openbugs/mod2_alpha.txt")),
+  tar_target(mod1_rr, import_openbugs("./openbugs/mod1_rr.txt")),
+  tar_target(mod2_rr, import_openbugs("./openbugs/mod2_rr.txt")),
+
+  ## Figures
   tar_target(fig_1b_1, make_fig_1b(
     ycc_lag, cases, color = "blue",
     title = "Cholera cases per week")
@@ -153,13 +173,22 @@ list(
     "Correlation between Configuration Status and CFR")
   ),
 
-
   ## Render reports
   tar_render(thesis, "reports/report.Rmd"),
 
   ## Save files
   tar_target(adj_list_out,
              dput(adj_list(yem_shp),
-                  file = "./data-raw/adj_list.txt",
-                  control = "niceNames"))
+                  file = "./openbugs/adj_list.txt",
+                  control = "niceNames")),
+  tar_target(init_list_1,
+             list( tau.ete = 1,
+                   tau.clu = 1,
+                   alpha0 = 0,
+                   b.ete = rep(0, 21),
+                   b.clu = rep(0, 21),
+                   alpha1 = 0.5) |>
+               dput(file = "./openbugs/init_list_1.txt",
+                    control = "niceNames")),
+  tar_target(data_model, save_data(yemen_4w))
 )

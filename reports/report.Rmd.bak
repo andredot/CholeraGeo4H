@@ -271,59 +271,59 @@ The above figure shows different preprocessing steps, which are available as par
 
 ## Results and discussion
 
-Results and discussion follow the pipeline outlined above. Data integrity information is checked before the results are presented.
+Results and discussion follow the pipeline outlined above. Data integrity information is checked before proceeding in the results presentation.
 
 Fig 1a - gtsummary
 
 ### Data exploration and visualisation - Temporal trends
 
-The four main variables used to track a cholera outbreak are the number of cases, the attack rate, deaths, and the Case Fatality Rate. To get a general picture, the absolute values (since the start of the outbreak) are visualised, both by district and cumulatively.
+The 4 main variables to track a cholera outbreak are the number of cases, the attack rate, deaths and Case Fatality Rate. To have a general picture, the absolute values (since the start of the outbreak) are visualised, both by district and cumulative.
 
 ```{r, figures-1b-cases}
 #Fig 1b - same as 1c  but broken down by district
 tar_read(fig_1b_1)
 ```
 
-Different dynamics are shown across the 21 governorates analysed, with some of them (Abyan, Ad Dali, Shabwa, ...) showing a stop after the initial increase, while others that never managed to control the outbreaks (Dhamar, Sanaa, both rural and city, Raymah,...).
+Different dynamics are shown across the 21 governorates analyzed, with some of them (Abyan, Ad Dali, Shabwa, ...) that show a stop after the initial increase, while others that never managed to control the outbreaks (Dhamar, Sanaa both rural and city, Raymah,...).
 
-Another interesting phenomenon is the sudden spikes in the first derivative, as can be observed in Sanaa (rural), Hadramawt, or Shabwah, where the new cases are grouped in a short timeframe that is indicative of an immediate worsening of the situation.
+Another interesting phenomenon, is the sudden spikes into the first derivative, as it can be observed in Sanaa (rural), Hadramawt, or Shabwah, where the new cases are grouped in a short timeframe that is indicative of an immediate worsening of the situation.
 
 ```{r, figures-1b-ar}
 tar_read(fig_1b_2)
 ```
 
-The attack rate is a fundamental variable that drives the resources needed to control an outbreak. Since it's calculated on the new cases and the population, the attack rate follows a similar shape to the new cases, but it is the peak most indicative. Districts such as Al Mahwit and Amran (AR = 75 per thousand) are across the most affected governorates, while in Sadah (AR = 12) and Hadramawt (AR = 1.5), most of the people managed to avoid the infection. Other drivers may explain that the limited testing is due to volatile access conditions, but in general, the attack rate analysis shows different dynamics across the country.
+The attack rate is one of the fundamental variables that drive the resources needed to control an outbreak. Since it's calculated on the new cases and the population, attack rate follows a similar shape as the new cases, but it is the peak that is most indicative. Districts as Al Mahwit and Amran (AR = 75 per thousand) are across the most affected governorates, while in Sadah (AR = 12) and Hadramawt (AR = 1.5) most of the people managed to avoid the infection. Other drivers may explain that, as the limited testing due to volatile access conditions, but in general the Attack rate analysis shows different dynamics across the Country.
 
 ```{r, figures-1b-deaths}
 tar_read(fig_1b_3)
 ```
 
-Deaths are a hard outcome that is usually easy to report at the Health Facility level compared to other indicators. Even in this case, there is significant variability across the regions, from only a few recorded deaths (Sadah, Shabwah) to hundreds of them (Amran, Ibb, Taiz,...). Since cholera does not usually cause permanent disabilities, death is the most important outcome to be monitored, but as for the absolute number of new cases, to understand the implication, a new metric is needed.
+Deaths are a hard outcome that is usually easy to report at the Health Facility level, compared to other indicators. Even in this case, there is great variability across the regions, spanning from only few recorded deaths (Sadah, Shabwah) to hundreds of them (Amran, Ibb, Taiz,...). Since cholera does not usually give permanent disabilities, death is the most important outcome to be monitored, but as for the absolute number of new cases, to understand the implication a new metric is needed.
 
 ```{r, figures-1b-cfr}
 tar_read(fig_1b_4) +
   geom_hline(yintercept = 1, color = "red")
 ```
 
-Case-Fatality Rate, apart from setting standards for the assistance provided (should be \<1%), is also a factor that shows the efficacy of the health system as a whole. The dataset shows the absolute CFR (from the start of the outbreak), so it's the only variable that is steadily decreasing. This, though, does not provide information on the moment-by-moment evolution of the epidemic.
+Case-Fatality Rate, apart from setting standards for the assistance provided (should be \<1%), is also a factor that shows the efficacy of the health system as a whole. In the dataset, it is shown the absolute CFR (from the start of the outbreak), so it's the only variable that is steadily decreasing. This, though, does not provide information on the moment by moment evolution of the outbreak.
 
-In addition, it is notable that a spike was seen at the beginning of the outbreak in most of the regions. This is due to a combination of factors: at the beginning, confirmed cases are low and are usually the worst in terms of clinical conditions. Scaling up the health system capacity and risk communication activities are also effective ways to lower overall mortality (and fatality).
+In addition to that, is notable that at the beginning of the outbreak in most of the regions, a spike is seen. This is due to a combination of factors: at the beginning, confirmed cases are low and are usually the worst in terms of clinical conditions. But also, scaling up the health systems capacity and risk communiction activities are effective ways to lower the overall mortality (and fatality, as well).
 
 ```{r, figures-1c-upper, fig.show="hold", out.width="50%"}
-#Fig 1c - whole epidemic curve (4 panels with the four epi variables)
+#Fig 1c - whole epidemic curve (4 panels with the 4 epi variables)
 tar_read(fig_1c_1)
 tar_read(fig_1c_2) +
   geom_hline(yintercept = 1, color = "red")
 ```
 
-From a country-level point of view, the outbreak was never controlled during the study period, probably due to the vulnerability factors outlined in the introduction. This is different from the governorates-level data, where the levelling off in some districts of the cases is a sign of a controlled outbreak. Most notably, deaths and CFR have an interesting behaviour that was not evident from the previous data: Deaths steadily increase until July 2024 with a steady growth rate (linear), but from then on, the growth is slower.
+From a country level point of view, the Outbreak has never been controlled in the study period, probably due to the vulnerability factors outlined in the introduction. This is different from the governorates-level data, where the levelling off in some districts of the cases is a sign of a controlled outbreak. Most notably, deaths and CFR have an interesting behaviour that was not evident from the previous data: Deaths steadily increase until July 2024 with a steady growth rate (linear), but from then on the growth is slower.
 
 ```{r, figures-1c-lower, fig.show="hold", out.width="50%"}
 tar_read(fig_1c_3)
 tar_read(fig_1c_4)
 ```
 
-Even though cumulative data are the standard way to collect that information, additional variables have been calculated in the pre-processing to show the cumulative ones only for the previous four weeks. This provides a different picture, more representative of what happened in the previous month for that particular week.
+Even if cumulative data are the standard way to collect those information, additional variables have been calculated in the pre-processing to show the cumulative ones only in the previous 4 weeks, which provide a different picture, more representative of what happened in the previous month for that particular week.
 
 ```{r, figures-1e, fig.show="hold", out.width="50%"}
 #Fig 1e - distribution of new cases and attack_rate  
@@ -340,7 +340,7 @@ tar_read(fig_1f_2) +
   geom_vline(xintercept = 1, color = "red")
 ```
 
-All of the univariate distributions are left skewed, as usual for outbreaks (negative death values are related to reporting errors). Combined, they show a situation where, in most districts, the situation was managed in a way that avoided a humanitarian disaster. In fact, even in particular areas where there were situations of dire humanitarian needs, the concerted efforts of the health authorities and international partners managed to contain the uncontrolled spread of the diseases.
+All of the univariate distributions are left skewed, as it is usual for outbreaks (negative values in deaths are related to reporting errors). Combined, it shows a situation where in most of the districts for most of the times, the situation was managed in a way that avoided a humanitarian disaster. In fact, even in particular areas there were situations of dire humanitarian needs, the concerted efforts of the health autorities and international partners managed to contain the uncontrolled spread of the diseases.
 
 ```{r, figures-1d, fig.show="hold", out.width="33%"}
 # Fig 1d - Three examples of different epi statuses situation w/colours  
@@ -349,19 +349,19 @@ tar_read(fig_1d_2) #Epi 2017-35 (early September)
 tar_read(fig_1d_3) #Epi 2017-51 (early December)
 ```
 
-From the key epidemiological variables, a general 3-coded status can be calculated. The cut-off has been defined within the scope of this work without external validation (e.g., with government-level risk assessment tools). Nevertheless, it uses similar definitions:
+From the key epidemiological variables, a general 3-coded status can be calculated. The cut-off has been defined within the scope of this work, without external validation (e.g., with government level risk assessment tools). Nevertheless, it uses similar definitions:
 
 -   A green area is an area without any new cases in the past four weeks (which is slightly shorter than the WHO standard of 40 days)
 
--   An orange area is an area with an active outbreak where the health system is responding effectively
+-   A orange area is an area with an active outbreak where the health system is responding effectively
 
--   A red area is an area where the health system resources are not enough to keep either the CFR under the 1% threshold (representing a situation where sick people access the proper care and the adequate number of cases is intercepted by healthcare staff), or an attack rate over 2 (x1000) signalling a high level of community transmission, or failure of the mitigation measures.
+-   A red area is an area where the health sytems resources are not enought to keep either the CFR under the 1% threshold (representing a situation where sick people access the proper care and the adequate number of cases is intercepted by healthcare staff), or an attack rate over 2 (x1000) signalling a high level of community transmission, or failure of the mitigation measures.
 
-Combined, the status provides a glimpse of the situation in the country. This is a useful target variable to predict, given the direct questions it can answer for managing humanitarian operations.
+Combined, the status provided in a glimpse the situation over the country. This is a useful target variable to predict, given the direct questions it can answer for managing humanitarian operations.
 
 ### Data exploration and visualisation - Correlations
 
-As a preliminary step, correlations with the key epidemiological variables are checked before checking additional modelling strategies.
+As a preliminary step before checking additional modelling strategies, correlations with the key epidemiological variables is checked.
 
 ```{r, figures-2a}
 #Fig 2a - correlation between new cases and deaths
@@ -369,7 +369,7 @@ tar_read(fig_2_a) +
   labs(x = "Cases", y = "Deaths")
 ```
 
-A certain degree of correlation between monthly cases and deaths for the different weeks is expected. The linear model fitter on the bidimensional density plot. The correlation is more robust for many new cases, and the trend is roughly linear. Since the disease takes time to kill an infected person, this initial result calls for a lagged correlation model to verify if the link is stronger.
+A certains degree of correlation is expected between monthly cases and deaths for the different weeks. The linear model fitter on the bidimensional density plot. The correlation is stronger for higher number of new cases, and the trend is roughly linear. Since the disease takes time to kill an infected person, this initial result calls for a lagged correlation model to verify is that link is stronger.
 
 ```{r, figures-2b}
 #Fig 2b - correlation between new cases and cfr
@@ -377,7 +377,7 @@ tar_read(fig_2_b) +
   ylim(-0.2,3)
 ```
 
-The same pattern is not so evident for the Case Fatality Rate, even if more cases are associated with a higher CFR in the same period. Even in this case, the preliminary model suggests a different approach incorporating lag considerations of a couple of weeks.
+The same pattern is not so evident for the Case Fatality Rate, even if higher nuber of cases is associated with a higher CFR in the same period. Even in this case, the preliminary model suggests a different approach incorporating lag considerations of a couple of weeks.
 
 ```{r,figures-2c-upper, fig.show="hold", out.width="50%"}
 #Fig 2c - correlation between status and 4 epi variables (4 panels)
@@ -391,19 +391,19 @@ tar_read(fig_2c_3)
 tar_read(fig_2c_4)
 ```
 
-How the status variable was built forces a certain level of correlation among the variables. This is less evident for the first two variables (cases and deaths) since the Attack rate and CFR are used to determine them.
+The way the status variable was built forces a certain level of correlation among the variables. This is less evident for the first two variables (cases and deaths), since Attack rate and CFR are used to determine them.
 
 ### Time series
 
-There are several methods to control for long-term and seasonal patterns in time series studies. Given the limited number of years, no seasonality can be modelled. The long-term component is added to the model since the cases' growth slowly increased. It is expected to be non-linear by applying splines to model smooth temporal trends, initially with 5 degrees of freedom for each year of data.
+There are several methods to control for long-term and seasonal patterns in time series studies. Given the limited number of years, no seasonality can be modelled. The long-term component is added to the model since the cases' growth was slowly increasing. It is expected to be non-linear by applying splines to model smooth temporal trends, initially with 5 degrees of freedom for each year of data.
 
 ```{r}
 tar_read(epi_conf)
 ```
 
-The initial model is a more sophisticated version of the plot shown above, clearly indicating that the epidemiological variables and the temporal components affect the outcome. This association is not very strong, as the residual deviance is similar to the Null one. Thus, it is difficult to determine the status from the original variables, but that is expected since the presented model does not consider any lag effect or geographical considerations.
+The initial model is a more sofisticated version of the plot shown above, with a clear indication that the epidemiological variables and the temporal components have an effect on the outcome. This association is not very strong, as the residual deviance is still similar to the Null one. Thus, it is not easy to determine the status from the original variables, but that is expected, since the presented model does not take into account any lag effect or geographical considerations.
 
-In the second iteration, the association between the status and the four epidemiological variables (in the previous month) is evaluated, accounting for lagged associations up to four weeks. A bidimensional exposure-lag-response function is defined (cross-basis), with four different models that can be fit from it.
+In the second iteration, the association between the Status and the four epidemiological variables (in the previous month) is evaluated, accounting for lagged associations up to four weeks. A bi-dimensional exposure-lag-response function is defined (cross-basis), with 4 different models which can be fit from them.
 
 ```{r,figures-3a-1, fig.show="hold", out.width="50%"}
 tar_load(ycc_lag)
@@ -481,15 +481,15 @@ plot(cp_attack, "overall", ci="lines", col=2, lty=2,
       main="Overall cumulative association", lwd=2, xlab="Attack rate")
 ```
 
-The effect at a particular cut-off and the overall cumulative association are shown. None of the charts contain any significant result for any lag of 1 week or more. Thus, modelling only from epidemiological variables is insufficient to predict the status accurately. In addition, the residual deviance from the models (not shown) is similar to the initial model, without any benefit in the residual variance from the additional lag considerations.
+The effect at a particular cut-off and the overall cumulative association are shown. None of the charts contain any significant result for any lag of 1 week or more. Thus, modelling only from epidemiological variables is insufficient to accurately predict the status. In addition to that, the residual deviance from the models (not shown) is similar to the initial model, without any benefit in the residual variance from the additional lag considerations.
 
-The last iteration is to verify the association at the single governorate level, and a dual-stage approach is used:
+Last iteration is to verify the association at the single governorate level, a due stage approach is used:
 
 -   A regression model in which the association of interest is estimated in each location, identical to the first model developed above;
 
 -   A meta-analysis to pool the estimates across locations.
 
-This does not consider the effect of geographical proximity, only the temporal association across the estimates.
+This does not take into consideration to effect of geographical proximity, only the temporal association across the estimates.
 
 ```{r,figures-3b, fig.show="hold", out.width="33%"}
 tar_load(log_epi)
@@ -524,27 +524,27 @@ metafor::forest(uni_cfr, transf=exp, refline=1, pch=23, bg=4, col=2,
 
 ```
 
-Even in this case, no significant result is obtained. The different strengths of associations across the district, each for the epidemiological variables, are not strong enough to explain a change in status.
+Even in this case, no significant result is obtained. The different strengths of associations across the district, each for the epidemiological variables are not strong enough to explain a change in Status.
 
 ### Ecological Trends
 
-Modelling ecological trends requires the definition of the proper target variable. In each week, the model will try to predict the status of that district in the following one (so with a one-week lag).
+Modelling ecological trends requires the definition of the proper target variable. In each particular week, the model will try to predict the status of that particular district in the following one (so with a one week lag).
 
-Three models are tested, with different epidemiological variables (either cases or attack rate, as they were the only ones in the previous section to show some cumulative association) and the status of the districts as covariates. A Poisson-gamma model with no spatial consideration is used to provide a reference.
+Three models are tested, with different epidemiological variables (either cases or attack rate, as they were the only ones in the previous section to show some kind of cumulative association) and the status of the districts as covariates. To provide a reference, a poisson-gamma model with no spatial consideration is used as a reference.
 
 #### Model 0 - no spatial component
 
-The first model is a simple Poisson-gamma model with no spatial consideration. The variables are the expected number of cases and the status in the previous week, which are used to predict the status in the following week.
+The first model is a simple Poisson-gamma model with no spatial consideration. Variables are the expected number of cases and the status in the previous week, to predict the status in the following one.
 
 ```{r}
 tar_read(mod0) |> summary()
 ```
 
-The results, despite showing a significant association for both variables, are non-indicative by themselves and should be considered a baseline.
+The results, despite showing a significative association for both of the variables, are non-indicative by themselves and are to be considered as a baseline.
 
 #### Model 1 - Cases
 
-The first BYM Model is similar to the former but has additional spatial considerations.
+The first BYM Model is similar to the former one, but with additional spatial considerations.
 
 Since this is a pilot project, due to computational complexity, only the BYM model for Early December (Epi week 2017-51) is run.
 
@@ -574,7 +574,7 @@ model
 }
 ```
 
-After properly initialising this model, we can provide a summary of the estimated coefficient of status. This shows a tendency towards a negative value of the Status variable, where higher statuses (equal to "worse situation") are inversely associated with a higher status in any particular region.
+After proper initializing this models, we can provide a summary of the estimate coefficient of status. This shows a tendency towards a negative value of the Status variable, where higher statuses (equal to "worse sitaution") are inversely associate with a higher status in any particular region.
 
 ![Posterior probability of the Status coefficient (model 1)](images/mod1_alpha1.jpg)
 
@@ -622,9 +622,9 @@ Alpha 1 is similar to the previous model, even if an opposite effect for alpha0 
 
 ## Conclusions
 
-Cholera spatial dynamics remain elusive as we try to model them. This short report analysed some temporal and spatial patterns (but not the two together) as an exploratory moment before different techniques are tested.
+Cholera spatial dynamics remain elusive as we try to model them. This short report analysed some of the temporal and spatial patterns (but not the two together), as an exploratory moment before different techniques are tested.
 
-The status classification doesn't fully capture the outbreak evolution, as the two analyses showed, but it is somewhat indicative of predictive power for the following week's evolution. The negative coefficient derived in both BYM models, compared with the close-to-zero one, shows that when spatial relationships are accounted for, there is an inverse relationship between a district's status and the ones of the others.
+The status classification doesn't fully capture the outbreak evolution, as it was shown in the two analysis, but it is somewhat indicative of a predictive power on the following week evolution. The negative coefficient derived in both of BYM models, compared with the close-to-zero one, shows that when spatial relationships are accounted for, there is an inverse relationship between the status of a district and the ones of the others.
 
 ## Acknowledgements {.appendix}
 

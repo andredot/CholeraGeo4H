@@ -28,6 +28,14 @@ import_data <- function(.data_path) {
     readr::read_csv()
 }
 
+import_openbugs <- function(.data_path) {
+  file.path(.data_path) |>
+    normalizePath() |>
+    readr::read_tsv()|>
+    dplyr::select(2:10) |>
+    dplyr::rename("coefficient" = "...2")
+}
+
 import_shape <- function(.data_path) {
   file.path(.data_path) |>
     normalizePath() |>
@@ -37,6 +45,7 @@ import_shape <- function(.data_path) {
 #' Preprocessing of Yemen Cholera cases
 #'
 #' @param db : dataframe obtained by the Yemen Cholera cases csv
+#' @param shp: a shapefile of the country
 #'
 #' @return a new db with
 #' - clean column names,
@@ -113,16 +122,21 @@ preprocess_join <- function(shp, db) {
     )
 }
 
-join_wider <- function(db1, db2, db3, db4, db5 = NULL) {
+join_wider <- function(db1, db2, db3, db4,
+                       db5 = NULL, db6 = NULL, db7 = NULL) {
   t <- db1 |>
     dplyr::left_join(db2, by = dplyr::join_by(pcode)) |>
     dplyr::left_join(db3, by = dplyr::join_by(pcode)) |>
     dplyr::left_join(db4, by = dplyr::join_by(pcode))
 
-  ifelse( "tbl" %in% class(db5),
-          t <- t |> dplyr::left_join(db5, by = dplyr::join_by(pcode)),
-          t
-  )
+  if( "tbl" %in% class(db5))
+    t <- t |> dplyr::left_join(db5, by = dplyr::join_by(pcode))
+
+  if( "tbl" %in% class(db6))
+    t <- t |> dplyr::left_join(db6, by = dplyr::join_by(pcode))
+
+  if( "tbl" %in% class(db7))
+    t <- t |> dplyr::left_join(db7, by = dplyr::join_by(pcode))
 
   return(t)
 }
@@ -203,4 +217,30 @@ cholera_status <- function(db) {
 }
 
 
-
+#' Calculate Expected counts
+#'
+#' @param db : a ycc_lag database
+#'
+#' @return db: ycc_lag with additional columns for expected epi
+#' variables and lead status (target of prediction).
+#' To provide better estimates the cases are averaged over the last 4
+#' weeks (hence the use of ycc_lag)
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   ycc_exp(ycc_lag)
+#' }
+ycc_exp <- function(db) {
+  db |>
+    dplyr::group_by(epi_date) |>
+    dplyr::mutate(
+      # Expected counts
+      cases_exp = cases * ( sum(cases)/ sum(pop)),
+      deaths_exp = cases * ( sum(deaths)/ sum(pop)),
+      cfr_exp = deaths_exp / cases_exp,
+      attack_exp = cases_exp / pop,
+      # Target variable
+      target_status = dplyr::lead(status)
+    )
+}
