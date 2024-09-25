@@ -97,11 +97,11 @@ Surveillance is an integrated system that ensures prompt detection of suspected 
 
 The Global Roadmap to Ending Cholera [@gtfcc_roadmap] is an initiative of the Global Taskforce on Cholera Control that focuses on three strategic axes:
 
-1. Early detection and quick response to contain outbreaks
+1.  Early detection and quick response to contain outbreaks
 
-2. A targeted multi-sectoral approach to prevent cholera recurrence, focusing on cholera hotspots, which are relatively small areas that are the most chronically affected by cholera cases
+2.  A targeted multi-sectoral approach to prevent cholera recurrence, focusing on cholera hotspots, which are relatively small areas that are the most chronically affected by cholera cases
 
-3. An effective mechanism of coordination for technical support, advocacy, resource mobilisation, and partnership at local and global levels
+3.  An effective mechanism of coordination for technical support, advocacy, resource mobilisation, and partnership at local and global levels
 
 This thesis project focuses on the First Strategic Pillar and aims to prove the feasibility of Anticipatory Approaches to cholera outbreaks.
 
@@ -135,7 +135,7 @@ The UN Office for the Coordination of Humanitarian Affairs (OCHA) defines Antici
 
 It is composed of three main components:
 
-1. A pre-agreed trigger consists of thresholds and decision-making rules based on reliable, timely, measurable forecasts. The advancement of weather forecasting and climate science enables more actions [@aa_rccc].
+1.  A pre-agreed trigger consists of thresholds and decision-making rules based on reliable, timely, measurable forecasts. The advancement of weather forecasting and climate science enables more actions [@aa_rccc].
 
 2.  **Pre-agreed activities:** This consists of accountable, feasible, effective and efficient actions to be implemented to support vulnerable communities in the window of opportunity between the trigger moment and the full impact of a shock
 
@@ -175,11 +175,11 @@ Particularly in the trigger part, it is recognised that triggers can take into c
 
 Those different possibilities have been reduced to three main approaches in the recent "Anticipatory Action for Epidemics" briefing from the Anticipation Hub [@alcayna_anticipatory_2023], with also suggestions on how to develop them:
 
-1. Identify the health impacts of hydrometeorological hazards, including a health component into existing protocols for other hazards, such as floods or cyclones.
+1.  Identify the health impacts of hydrometeorological hazards, including a health component into existing protocols for other hazards, such as floods or cyclones.
 
-2. Multi-stepped composite (surveillance and aggravating factors). This approach combines different indicators, including surveillance data on the disease of interest and known drivers of disease transmission, to establish a composite trigger.
+2.  Multi-stepped composite (surveillance and aggravating factors). This approach combines different indicators, including surveillance data on the disease of interest and known drivers of disease transmission, to establish a composite trigger.
 
-3. Mathematical models predict outbreak risk and the probability of a future outbreak in a given country or location.
+3.  Mathematical models predict outbreak risk and the probability of a future outbreak in a given country or location.
 
 That said, developing a protocol for Epidemics requires shifting the mindset from preventing an outbreak to preventing it from reaching critical levels.
 
@@ -205,13 +205,13 @@ Exploration of temporal and geographical dynamics:
 
 -   Each area is classified into three classes: either the outbreak is controlled (level 0 - preparedness), cases are on the surge but with CFR under the 1% threshold (level 1 - early action), or CFR is over 1%, signalling an unacceptable stress level (level 2 - response). Level 2 is declared also if the attack rate in the previous four weeks has been higher than 2 per 1000 people. This classification is calculated only on data available at that moment and is the target of prediction.
 
--   Two locations will be analysed for temporal correlation from a surge in cases in neighbouring districts through a Distributed Lag Model, identifying the best lead time for the following step. Pooled estimates are obtained to verify the temporal correlation of that with a meta-analytical approach.
+-   Dataset will be analysed for temporal correlation from a surge in cases through a Distributed Lag Model, identifying the best lead time for the following step. Pooled estimates are obtained to verify the temporal correlation of that with a meta-analytical approach.
 
 Once the preprocessing and exploration are completed, modelling steps can be implemented.
 
 -   The target of prediction is the level of a particular district, some weeks in advance, identified in the exploration stage.
 
--   Three models are tested: the first uses the number of cases, the second uses the CFR, and the third uses the districts' attack rates as input variables. All of them are BYM models with the 3-level classification as a covariate.
+-   Two models are tested: the first uses the number of cases, the second uses the districts' attack rates as input variables. All of them are BYM models with the 3-level classification as a covariate.
 
 -   A fourth model, a non-bayesian Poisson model, is also used as a reference.
 

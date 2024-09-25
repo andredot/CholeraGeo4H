@@ -175,6 +175,7 @@ list(
 
   ## Render reports
   tar_render(thesis, "reports/report.Rmd"),
+  tar_render(tesi_ita, "reports/Report_ita.Rmd"),
 
   ## Save files
   tar_target(adj_list_out,
